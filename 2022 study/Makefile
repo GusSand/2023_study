@@ -1,0 +1,27 @@
+CFLAGS=-I. -Icmocka/include -g
+# We can enable colors here... but I don't know if it works on Windows
+# CFLAGS=-I. -Icmocka/include -g -DUSE_TERM_COLORS
+DEPS = list.h
+OBJ = list.o main.o 
+
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+all: mylist runtests
+
+mylist: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS)
+
+list_testmode.o: list.c $(DEPS)
+	$(CC) -DUNIT_TESTING -c -o $@ $< $(CFLAGS)
+
+runtests: list_testmode.o runtests.o cmocka/cmocka.o
+	$(CC) -o $@ $^ $(CFLAGS)
+
+.PHONY: check
+check: runtests
+	./runtests
+
+.PHONY: clean
+clean:
+	rm -f *.o cmocka/*.o runtests mylist

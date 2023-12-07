@@ -1,0 +1,3 @@
+apple,0.80,2
+banana,0.50,3
+cheese,10.59,1
