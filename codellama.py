@@ -2,6 +2,7 @@ from transformers import AutoTokenizer
 import transformers
 import torch
 import time
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 tokenizer = AutoTokenizer.from_pretrained("codellama/CodeLlama-7b-hf")
 
@@ -12,7 +13,21 @@ pipeline = transformers.pipeline(
     device_map="auto",
 )
 
-def main():
+def phi2():
+    tokenizer_phi2 = AutoTokenizer.from_pretrained("microsoft/phi-2")
+    model_phi2 = AutoModelForCausalLM.from_pretrained("microsoft/phi-2")
+
+    inputs = tokenizer('''def print_prime(n):
+    """
+    Print all primes between 1 and n
+    """''', return_tensors="pt", return_attention_mask=False)
+
+    outputs = model_phi2.generate(**inputs, max_length=200)
+    text = tokenizer_phi2.batch_decode(outputs)[0]
+    print(text)
+
+
+def llama():
     st_begin = time.time()
 
     # repeat the process 10 times
@@ -51,5 +66,9 @@ def check_cuda():
 if __name__ == "__main__":
     check_cuda()
 
+    # for _ in range(10):
+    #     llama()
+
+
     for _ in range(10):
-        main()
+        phi2()

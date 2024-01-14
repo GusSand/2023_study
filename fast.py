@@ -8,8 +8,11 @@ from transformers import AutoTokenizer
 import transformers
 import torch
 import time
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
 
 tokenizer = AutoTokenizer.from_pretrained("codellama/CodeLlama-7b-hf")
+
 
 pipeline = transformers.pipeline(
     "text-generation",
@@ -17,6 +20,9 @@ pipeline = transformers.pipeline(
     torch_dtype=torch.float16,
     device_map="auto",
 )
+
+tokenizer_phi2 = AutoTokenizer.from_pretrained("microsoft/phi-2")
+model_phi2 = AutoModelForCausalLM.from_pretrained("microsoft/phi-2")
 
 #load environment variables 
 load_dotenv()
@@ -36,6 +42,16 @@ async def get_api_key( api_key_header: Optional[str] = Security(api_key_header))
     else:
         raise HTTPException(status_code=403, detail="Invalid API Key")
     
+@app.post("/prompt_phi2/")
+async def prompt_phi2(prompt: Prompt, api_key: APIKey = Depends(get_api_key)):
+
+    try:
+        response = process_prompt_phi2(prompt.text)
+        return {"response":response}
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.post("/prompt_llama7b/")
 async def prompt_llama7b(prompt: Prompt, api_key: APIKey = Depends(get_api_key)):
@@ -47,6 +63,19 @@ async def prompt_llama7b(prompt: Prompt, api_key: APIKey = Depends(get_api_key))
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
+def process_prompt_phi2(prompt):
+
+    inputs = tokenizer_phi2.encode(prompt, return_tensors="pt", return_attention_mask=False)
+    outputs = model_phi2.generate(inputs, 
+                                  max_length=100, 
+                                  do_sample=True, 
+                                  top_p=0.95, 
+                                  top_k=60, 
+                                  num_return_sequences=1)
+    
+    generated_text = tokenizer_phi2.decode(outputs[0], skip_special_tokens=True)
+    return generated_text
+
 
 def process_prompt_llama7b(prompt):
 
