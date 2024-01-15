@@ -9,19 +9,13 @@ import transformers
 import torch
 import time
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import LlamaForCausalLM, CodeLlamaTokenizer
 
+tokenizer = CodeLlamaTokenizer.from_pretrained("codellama/CodeLlama-7b-hf")
+model  = LlamaForCausalLM.from_pretrained("codellama/CodeLlama-7b-hf").to("cuda")
 
-transfomers_token = "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"
-
-tokenizer = AutoTokenizer.from_pretrained("codellama/CodeLlama-7b-hf")
-
-
-pipeline = transformers.pipeline(
-    "text-generation",
-    model="codellama/CodeLlama-7b-hf",
-    torch_dtype=torch.float16,
-    device_map="auto",
-)
+tokenizer_llama34 = AutoTokenizer.from_pretrained("codellama/CodeLlama-34b-hf")
+model_llama34 = AutoModelForCausalLM.from_pretrained("codellama/CodeLlama-34b-hf").to("cuda")
 
 tokenizer_phi2 = AutoTokenizer.from_pretrained("microsoft/phi-2")
 model_phi2 = AutoModelForCausalLM.from_pretrained("microsoft/phi-2")
@@ -45,18 +39,30 @@ class Prompt(BaseModel):
 
 def process_llama_7b(prompt_data):
 
-    sequences = pipeline(
-        prompt_data,
-        do_sample=True,
-        temperature=0.6,
-        top_p=0.9,
-        num_return_sequences=1,
-        eos_token_id=tokenizer.eos_token_id,
-        max_length=100,
-    )
-
-    return sequences[0]['generated_text']
+    inputs = tokenizer(prompt_data, return_tensors="pt", return_attention_mask=False)
+    outputs = model.generate(inputs['input_ids'].to("cuda"), 
+                                  max_length=100, 
+                                  do_sample=True, 
+                                  top_p=0.95, 
+                                  top_k=60, 
+                                  num_return_sequences=1)
+    generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    return generated_text
     
+
+def process_llama_34b(prompt_data):
+
+    inputs = tokenizer_llama34.encode(prompt_data, return_tensors="pt", return_attention_mask=False)
+    outputs = model_llama34.generate(inputs, 
+                                  max_length=100, 
+                                  do_sample=True, 
+                                  top_p=0.95, 
+                                  top_k=60, 
+                                  num_return_sequences=1)
+    
+    generated_text = tokenizer_llama34.decode(outputs[0], skip_special_tokens=True)
+    return generated_text
+
 
 def process_phi2(prompt_data):
 
@@ -87,6 +93,7 @@ def process_starcoder(prompt_data):
 
 model_functions = {
     "llama_7b": process_llama_7b,
+    "llama_34b": process_llama_34b,
     "phi2": process_phi2,
     "starcoder": process_starcoder,
 }

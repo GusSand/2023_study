@@ -4,7 +4,7 @@ import torch
 import time
 
 # Set your OpenAI API key
-api_key = "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"
+api_key = ""
 api_llama = "BAD_F00D"
 
 # Set the API endpoint URL for OpenAI GPT-3.5-turbo
