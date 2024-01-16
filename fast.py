@@ -14,8 +14,8 @@ from transformers import LlamaForCausalLM, CodeLlamaTokenizer
 tokenizer = CodeLlamaTokenizer.from_pretrained("codellama/CodeLlama-7b-hf")
 model  = LlamaForCausalLM.from_pretrained("codellama/CodeLlama-7b-hf").to("cuda")
 
-# tokenizer_llama34 = AutoTokenizer.from_pretrained("codellama/CodeLlama-34b-hf")
-# model_llama34 = AutoModelForCausalLM.from_pretrained("codellama/CodeLlama-34b-hf").to("cuda")
+#tokenizer_llama34 = AutoTokenizer.from_pretrained("codellama/CodeLlama-34b-hf")
+#model_llama34 = AutoModelForCausalLM.from_pretrained("codellama/CodeLlama-34b-hf").to("cuda")
 
 tokenizer_phi2 = AutoTokenizer.from_pretrained("microsoft/phi-2")
 model_phi2 = AutoModelForCausalLM.from_pretrained("microsoft/phi-2")
@@ -46,7 +46,8 @@ def process_llama_7b(prompt_data):
                                   top_p=0.95, 
                                   top_k=60, 
                                   num_return_sequences=1)
-    generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+    generated_text = tokenizer.batch_decode(outputs[:, inputs['input_ids'].shape[1]:])[0]
     return generated_text
     
 
@@ -60,7 +61,7 @@ def process_llama_34b(prompt_data):
                                   top_k=60, 
                                   num_return_sequences=1)
     
-    generated_text = tokenizer_llama34.decode(outputs[0], skip_special_tokens=True)
+    generated_text = tokenizer_llama34.batch_decode(outputs[:, inputs['input_ids'].shape[1]:])[0]
     return generated_text
 
 
@@ -74,7 +75,7 @@ def process_phi2(prompt_data):
                                   top_k=60, 
                                   num_return_sequences=1)
     
-    generated_text = tokenizer_phi2.decode(outputs[0], skip_special_tokens=True)
+    generated_text = tokenizer_phi2.batch_decode(outputs[:, inputs['input_ids'].shape[1]:])[0]
     return generated_text
 
 
@@ -88,6 +89,7 @@ def process_starcoder(prompt_data):
                                   top_k=60, 
                                   num_return_sequences=1)
     generated_text = tokenizer_starcoder.decode(outputs[0], skip_special_tokens=True)
+
     return generated_text
 
 
