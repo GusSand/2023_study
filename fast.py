@@ -45,6 +45,8 @@ def process_llama_7b(prompt_data):
                                   do_sample=True, 
                                   top_p=0.95, 
                                   top_k=60, 
+
+                                  return_full_text=False,
                                   num_return_sequences=1)
     generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return generated_text
@@ -58,6 +60,7 @@ def process_llama_34b(prompt_data):
                                   do_sample=True, 
                                   top_p=0.95, 
                                   top_k=60, 
+                                  return_full_text=False,
                                   num_return_sequences=1)
     
     generated_text = tokenizer_llama34.decode(outputs[0], skip_special_tokens=True)
@@ -72,6 +75,8 @@ def process_phi2(prompt_data):
                                   do_sample=True, 
                                   top_p=0.95, 
                                   top_k=60, 
+
+                                  return_full_text=False,
                                   num_return_sequences=1)
     
     generated_text = tokenizer_phi2.decode(outputs[0], skip_special_tokens=True)
@@ -86,6 +91,8 @@ def process_starcoder(prompt_data):
                                   do_sample=True, 
                                   top_p=0.95, 
                                   top_k=60, 
+
+                                  return_full_text=False,
                                   num_return_sequences=1)
     generated_text = tokenizer_starcoder.decode(outputs[0], skip_special_tokens=True)
     return generated_text
