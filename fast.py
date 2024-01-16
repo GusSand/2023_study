@@ -14,15 +14,15 @@ from transformers import LlamaForCausalLM, CodeLlamaTokenizer
 tokenizer = CodeLlamaTokenizer.from_pretrained("codellama/CodeLlama-7b-hf")
 model  = LlamaForCausalLM.from_pretrained("codellama/CodeLlama-7b-hf").to("cuda")
 
-tokenizer_llama34 = AutoTokenizer.from_pretrained("codellama/CodeLlama-34b-hf")
-model_llama34 = AutoModelForCausalLM.from_pretrained("codellama/CodeLlama-34b-hf").to("cuda")
+# tokenizer_llama34 = AutoTokenizer.from_pretrained("codellama/CodeLlama-34b-hf")
+# model_llama34 = AutoModelForCausalLM.from_pretrained("codellama/CodeLlama-34b-hf").to("cuda")
 
 tokenizer_phi2 = AutoTokenizer.from_pretrained("microsoft/phi-2")
 model_phi2 = AutoModelForCausalLM.from_pretrained("microsoft/phi-2")
 
 starcoder =  "bigcode/starcoder"
 tokenizer_starcoder = AutoTokenizer.from_pretrained(starcoder)
-model_starcoder = AutoModelForCausalLM.from_pretrained(starcoder).to("cuda")
+model_starcoder = AutoModelForCausalLM.from_pretrained(starcoder)
 
 #load environment variables 
 load_dotenv()
@@ -114,7 +114,7 @@ async def process_prompt(prompt_data: dict, authorization: str = Header(None)):
         model = prompt_data.get("model")
 
         if model not in model_functions:
-            raise HTTPException(status_code=400, detail="Invalid model parameter")
+            model = "llama_7b"
         
         prompt = prompt_data.get("prompt")
         
