@@ -13,6 +13,13 @@ from transformers import LlamaForCausalLM, CodeLlamaTokenizer
 
 tokenizer = CodeLlamaTokenizer.from_pretrained("codellama/CodeLlama-7b-hf")
 model  = LlamaForCausalLM.from_pretrained("codellama/CodeLlama-7b-hf").to("cuda")
+pipeline = transformers.pipeline(
+    "text-generation",
+    model="codellama/CodeLlama-7b-hf",
+    torch_dtype=torch.float16,
+    device_map="auto",
+)
+
 
 # tokenizer_llama34 = AutoTokenizer.from_pretrained("codellama/CodeLlama-34b-hf")
 # model_llama34 = AutoModelForCausalLM.from_pretrained("codellama/CodeLlama-34b-hf").to("cuda")
@@ -40,15 +47,30 @@ class Prompt(BaseModel):
 def process_llama_7b(prompt_data):
 
     inputs = tokenizer(prompt_data, return_tensors="pt", return_attention_mask=False)
-    outputs = model.generate(inputs['input_ids'].to("cuda"), 
-                                  max_length=100, 
-                                  do_sample=True, 
-                                  top_p=0.95, 
-                                  top_k=60, 
-                                  num_return_sequences=1)
-    generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    return generated_text
-    
+
+    sequences = pipeline(
+        'def fibonacci(',
+        do_sample=True,
+        temperature=0.2,
+        top_p=0.9,
+        num_return_sequences=1,
+        return_full_text=False,
+        eos_token_id=tokenizer.eos_token_id,
+        max_length=100,
+    )
+
+    result = sequences[0]['generated_text']
+
+    # outputs = model.generate(inputs['input_ids'].to("cuda"), 
+    #                               max_length=100, 
+    #                               do_sample=True, 
+    #                               top_p=0.95, 
+    #                               top_k=60, 
+    #                               return_full_text=False, 
+    #                               num_return_sequences=1)
+    # generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    # return generated_text
+    return result    
 
 def process_llama_34b(prompt_data):
 
@@ -98,14 +120,14 @@ model_functions = {
     "starcoder": process_starcoder,
 }
 
-@app.post("/process_prompt/")
+@app.post("/process_prompt")
 async def process_prompt(prompt_data: dict, authorization: str = Header(None)):
 
     try:
         # Check the authorization header for the access token
         expected_api_key = "BAD_F00D"
-        if authorization != f"Bearer {expected_api_key}":
-            raise HTTPException(status_code=401, detail="Unauthorized")
+        # if authorization != f"Bearer {expected_api_key}":
+        #     raise HTTPException(status_code=401, detail="Unauthorized")
         
         if "model" not in prompt_data:
             raise HTTPException(status_code=400, detail="Missing model parameter")
@@ -130,7 +152,7 @@ async def process_prompt(prompt_data: dict, authorization: str = Header(None)):
         # Perform processing using the received data (replace this with your actual logic)
         result = {
             "model": model,
-            "prompt": prompt,
+            #"prompt": prompt,
             "max_tokens": max_tokens,
             "response": the_response # Replace with your actual response
         }
