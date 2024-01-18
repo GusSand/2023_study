@@ -102,7 +102,7 @@ def process_phi2(prompt_data):
 
 def process_starcoder(prompt_data):
 
-    input = tokenizer_starcoder.encode(prompt_data, return_tensors="pt", return_attention_mask=False).to("cuda")
+    input = tokenizer_starcoder.encode(prompt_data, return_tensors="pt", return_attention_mask=False)
     outputs = model_starcoder.generate(input, 
                                   max_length=100, 
                                   do_sample=True, 

@@ -1,0 +1,12 @@
+[Unit]
+Description=LLM server Unicorn app
+
+[Service]
+ExecStart=/home/paperspace/.local/bin/uvicorn fast:app --host 0.0.0.0 --port 8000 --workers 4
+WorkingDirectory=/home/paperspace/dev/2023_study
+User=paperspace
+Group=paperspace
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
