@@ -24,8 +24,8 @@ headers = {
 prompt = "# Print all primes between 1 and n \n def print_primes(n):"
 data = {
 
-    "model": "gpt-3.5-turbo-instruct",  # Codex model for code-related tasks
-    #"model": "phi2",  # Codex model for code-related tasks
+    #"model": "gpt-3.5-turbo-instruct",  # Codex model for code-related tasks
+    "model": "phi2",  # Codex model for code-related tasks
     #"model": "llama_7b",  # Codex model for code-related tasks
     #"model": "starcoder",  # Codex model for code-related tasks
     "prompt": prompt, 
@@ -42,9 +42,12 @@ data = {
 # else:
 #     print("Nope")
 
-st = time.time()
+
+print("Sending the request...")
+print("model:", data["model"])
 
 # Send the POST request
+st = time.time()
 response = requests.post(url_llama, headers=headers, json=data)
 
 # Check if the request was successful
