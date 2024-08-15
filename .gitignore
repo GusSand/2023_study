@@ -2,3 +2,5 @@
 *.o
 mylist
 runtest
+.venv
+**/__pycache__/
