@@ -11,7 +11,6 @@ from problems.encode import encode
 
 
 def test_1():
-    print (encode('test'))
     assert encode('test') == 'TGST'
 
 def test_2():

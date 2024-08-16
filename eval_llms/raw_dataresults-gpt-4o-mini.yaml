@@ -1,0 +1,16 @@
+- completion: "def encode(message):\n    vowels = 'aeiouAEIOU'\n    encoded_message\
+    \ = []\n    \n    for char in message:\n        if char.isalpha():\n         \
+    \   # Swap case\n            if char.islower():\n                new_char = char.upper()\n\
+    \            else:\n                new_char = char.lower()\n            \n  \
+    \          # Replace vowels\n            if new_char in vowels:\n            \
+    \    new_char = chr(ord(new_char) + 2)\n            \n            encoded_message.append(new_char)\n\
+    \        else:\n            encoded_message.append(char)\n    \n    return ''.join(encoded_message)"
+  task_id: UserEval/1
+- completion: "def isPalindrome(s: str) -> bool:\n    # Normalize the string by lowering\
+    \ case and filtering non-alphanumeric characters\n    filtered_chars = ''.join(char.lower()\
+    \ for char in s if char.isalnum())\n    # Check if the filtered string is equal\
+    \ to its reverse\n    return filtered_chars == filtered_chars[::-1]"
+  task_id: UserEval/2
+- completion: "def words_string(s):\n    import re\n    return re.split(r'[,\\s]+',\
+    \ s.strip())"
+  task_id: UserEval/3
