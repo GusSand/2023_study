@@ -15,7 +15,12 @@ import time
 import re
 import threading 
 
-logging.basicConfig(level=logging.DEBUG)
+# ANSI color codes
+RED = "\033[91m"
+RESET = "\033[0m"
+
+
+logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
 
 class TimeoutException(Exception):
@@ -121,8 +126,13 @@ def unsafe_execute(problem: Dict, completion: str, timeout: float) -> Dict:
         with time_limit(timeout):
             return execute()
     except TimeoutException:
-        logger.warning(f"Timeout occurred for problem: {problem['task_id']}")
+        error_msg = f"Timeout occurred for problem: {problem['task_id']}"
+        logger.warning(f"{RED}{error_msg}{RESET}")
         return {"passed": False, "result": "Timed out"}
+    except Exception as e:
+        error_msg = f"Error occurred for problem: {problem['task_id']}: {str(e)}"
+        logger.error(f"{RED}{error_msg}{RESET}")
+        return {"passed": False, "result": f"Error: {str(e)}"}
 
 def check_correctness(problem: Dict, completion: str, timeout: float,
                       completion_id: Optional[int] = None) -> Dict:

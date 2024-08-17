@@ -6,9 +6,10 @@ from execution import unsafe_execute, reliability_guard
 import yaml
 import numpy as np
 import tqdm
-
 from data import read_problems, stream_yaml, write_yaml
 from execution import check_correctness, unsafe_execute
+RED = "\033[91m"
+RESET = "\033[0m"
 
 def estimate_pass_at_k(
     num_samples: Union[int, List[int], np.ndarray],
@@ -51,6 +52,8 @@ def evaluate_functional_correctness(
         task_id = sample["task_id"]
         completion = sample["completion"]
         result = unsafe_execute(problems[task_id], completion, timeout)
+        if not result["passed"]:
+            print(f"\n{RED}{'='*50}\nERROR in {task_id}:\n{result['result']}\n{'='*50}{RESET}\n")
         results.append({
             "task_id": task_id,
             "completion": sample["completion"],
