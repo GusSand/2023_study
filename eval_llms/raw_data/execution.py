@@ -96,31 +96,62 @@ def unsafe_execute(problem: Dict, completion: str, timeout: float) -> Dict:
                     exec_globals = {}
                     exec(code, exec_globals)
                     
-                    func = exec_globals[problem['entry_point']]
-                    logger.debug(f"Function to test: {problem['entry_point']}")
-                    
+                    func_name = problem['entry_point']
+                    func = exec_globals[func_name]
+                    logger.debug(f"Function to test: {func_name}")                    
+
                     results = []
                     for i, test in enumerate(problem['tests']):
                         logger.debug(f"Running test {i+1}")
+
                         input_val = test['input']
-                        expected = test['expected']
+                        expected = test['expected']  # Changed from 'output' to 'expected'
                         start_time = time.time()
-                        result = func(input_val)
+
+                        try:
+                            if isinstance(input_val, (int, str)):
+                                # If input is a string, pass it directly
+                                result = func(input_val)
+                            elif isinstance(input_val, dict):
+                                # If input is a dict, pass as keyword arguments
+                                result = func(**input_val)
+                            else:
+                                # Otherwise, assume it's a list or tuple and unpack
+                                result = func(*input_val)
+                        except Exception as e:
+                            logger.error(f"Error executing test {i+1}: {str(e)}")
+                            results.append({
+                                "test_case": i + 1,
+                                "passed": False,
+                                "input": input_val,
+                                "expected": expected,
+                                "actual": f"Error: {str(e)}",
+                                "execution_time": 0
+                            })
+                            continue
+
                         end_time = time.time()
                         execution_time = end_time - start_time
                         logger.debug(f"Test {i+1} execution time: {execution_time:.4f} seconds")
                         passed = result == expected
-                        results.append((passed, execution_time))
+                        results.append({
+                            "test_case": i + 1,
+                            "passed": passed,
+                            "input": input_val,
+                            "expected": expected,
+                            "actual": result,
+                            "execution_time": execution_time
+                        })
                         logger.debug(f"Test {i+1} result: {'Pass' if passed else 'Fail'}, Expected: {expected}, Got: {result}")
                     
                     return {
-                        "passed": all(passed for passed, _ in results),
-                        "result": "All tests passed" if all(passed for passed, _ in results) else "Some tests failed",
-                        "execution_time": sum(execution_time for _, execution_time in results)
+                        "passed": all(r["passed"] for r in results),
+                        "results": results,
+                        "execution_time": sum(r["execution_time"] for r in results)
                     }
                 except Exception as e:
                     logger.error(f"Error occurred for problem: {problem['task_id']}: {str(e)}")
-                    return {"passed": False, "result": f"Error: {str(e)}"}
+                    return {"passed": False, "error": str(e)}
 
     try:
         with time_limit(timeout):

@@ -8,6 +8,11 @@ import numpy as np
 import tqdm
 from data import read_problems, stream_yaml, write_yaml
 from execution import check_correctness, unsafe_execute
+import textwrap
+from pygments import highlight
+from pygments.lexers import PythonLexer
+from pygments.formatters import TerminalFormatter
+
 RED = "\033[91m"
 RESET = "\033[0m"
 
@@ -39,9 +44,20 @@ def estimate_pass_at_k(
 
 HUMAN_EVAL = 'eval.yaml'
 
+def format_code(code_string):
+    # Remove leading/trailing whitespace and dedent
+    formatted_code = textwrap.dedent(code_string.strip())
+    # Replace escaped newlines with actual newlines
+    formatted_code = formatted_code.replace('\\n', '\n')
+    return formatted_code
+
+def print_highlighted_code(code):
+    highlighted_code = highlight(code, PythonLexer(), TerminalFormatter())
+    print(highlighted_code)
+
 def evaluate_functional_correctness(
     sample_file: str,
-    k: List[int] = [1, 10, 100],
+    k: List[int] = [1, 5, 10],
     timeout: float = 20.0,
     problem_file: str = HUMAN_EVAL,
 ):
@@ -50,22 +66,45 @@ def evaluate_functional_correctness(
 
     for sample in tqdm.tqdm(stream_yaml(sample_file)):
         task_id = sample["task_id"]
-        completion = sample["completion"]
+        completion = format_code(sample["completion"])
         result = unsafe_execute(problems[task_id], completion, timeout)
-        if not result["passed"]:
-            print(f"\n{RED}{'='*50}\nERROR in {task_id}:\n{result['result']}\n{'='*50}{RESET}\n")
+        
+        # print(f"\n{RED}{'='*50}\nResults for {task_id}:\n{'='*50}{RESET}\n")
+        # print("Code:")
+        # print_highlighted_code(completion)
+        # print("\nTest Results:")
+        failed_tests = [test for test in result.get("results", []) if not test["passed"]]
+
+        if failed_tests or "error" in result:
+            print(f"{RED}{'='*50}\nResults for {task_id}:\n{'='*50}{RESET}\n")
+            print("Code:")
+            print_highlighted_code(completion)
+            print("\nTest Results:")
+            if "error" in result:
+                print(f"{RED}Error: {result['error']}{RESET}")
+            for test_result in failed_tests:
+                print(f"{RED}Test case {test_result['test_case']}: FAIL{RESET}")
+                print(f"Input: {test_result['input']}")
+                print(f"Expected: {test_result['expected']}")
+                print(f"Actual: {test_result['actual']}")
+                print(f"Execution time: {test_result['execution_time']:.4f} seconds\n")
+
+        
+            print(f"{RED}{'='*50}{RESET}\n")
+        
         results.append({
             "task_id": task_id,
-            "completion": sample["completion"],
+            "completion": completion,
             "passed": result["passed"],
-            "result": result["result"],
+            "results": result.get("results", []),
+            "error": result.get("error", None),
             "execution_time": result.get("execution_time", None)
         })
 
     # Write results to YAML file
     out_file = f"{sample_file}_results.yaml"
     with open(out_file, 'w') as f:
-        yaml.dump(results, f)
+        yaml.dump(results, f, default_flow_style=False)
 
     print(f"Results written to {out_file}")
 
