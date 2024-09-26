@@ -1,0 +1,77 @@
+- completion: "def removeElement(nums, val):\n    k = 0  # Initialize a counter for\
+    \ the number of elements not equal to val\n    for i in range(len(nums)):\n  \
+    \      if nums[i] != val:  # Check if the current element is not equal to val\n\
+    \            nums[k] = nums[i]  # Place it at the k-th position\n            k\
+    \ += 1  # Increment k\n    return k  # Return the count of elements not equal\
+    \ to val"
+  task_id: UserEval/1
+- completion: "def isPalindrome(s: str) -> bool:\n    # Filter only alphanumeric characters\
+    \ and convert to lowercase\n    filtered_chars = ''.join(c.lower() for c in s\
+    \ if c.isalnum())\n    # Check if the filtered string is equal to its reverse\n\
+    \    return filtered_chars == filtered_chars[::-1]"
+  task_id: UserEval/2
+- completion: "def setZeroes(matrix):\n    if not matrix:\n        return\n    \n\
+    \    m, n = len(matrix), len(matrix[0])\n    rows, cols = set(), set()\n    \n\
+    \    # First pass to find all the zeros\n    for i in range(m):\n        for j\
+    \ in range(n):\n            if matrix[i][j] == 0:\n                rows.add(i)\n\
+    \                cols.add(j)\n    \n    # Second pass to set the rows and columns\
+    \ to zeros\n    for i in range(m):\n        for j in range(n):\n            if\
+    \ i in rows or j in cols:\n                matrix[i][j] = 0"
+  task_id: UserEval/3
+- completion: "from typing import List, Optional\nimport heapq\n\nclass ListNode:\n\
+    \    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next\
+    \ = next\n\ndef mergeKLists(lists: List[Optional[ListNode]]) -> Optional[ListNode]:\n\
+    \    min_heap = []\n    \n    # Initialize the heap\n    for index, linked_list\
+    \ in enumerate(lists):\n        if linked_list:  # If the list is not empty\n\
+    \            heapq.heappush(min_heap, (linked_list.val, index, linked_list))\n\
+    \    \n    # Dummy node to help construct the merged list\n    dummy = ListNode(0)\n\
+    \    current = dummy\n    \n    while min_heap:\n        val, index, node = heapq.heappop(min_heap)\n\
+    \        current.next = ListNode(val)\n        current = current.next\n      \
+    \  \n        # If there is a next node in the list, push it to the heap\n    \
+    \    if node.next:\n            heapq.heappush(min_heap, (node.next.val, index,\
+    \ node.next))\n    \n    return dummy.next"
+  task_id: UserEval/4
+- completion: "def letterCombinations(digits):\n    if not digits:\n        return\
+    \ []\n\n    phone_map = {\n        '2': 'abc',\n        '3': 'def',\n        '4':\
+    \ 'ghi',\n        '5': 'jkl',\n        '6': 'mno',\n        '7': 'pqrs',\n   \
+    \     '8': 'tuv',\n        '9': 'wxyz'\n    }\n\n    def backtrack(index, path):\n\
+    \        if index == len(digits):\n            combinations.append(\"\".join(path))\n\
+    \            return\n        \n        letters = phone_map[digits[index]]\n  \
+    \      for letter in letters:\n            path.append(letter)\n            backtrack(index\
+    \ + 1, path)\n            path.pop()\n\n    combinations = []\n    backtrack(0,\
+    \ [])\n    return combinations"
+  task_id: UserEval/5
+- completion: "def int_to_mini_roman(num):\n    val = [\n        1000, 900, 500, 400,\n\
+    \        100, 90, 50, 40,\n        10, 9, 5, 4,\n        1\n    ]\n    syms =\
+    \ [\n        \"m\", \"cm\", \"d\", \"cd\",\n        \"c\", \"xc\", \"l\", \"xl\"\
+    ,\n        \"x\", \"ix\", \"v\", \"iv\",\n        \"i\"\n    ]\n    roman_numeral\
+    \ = \"\"\n    for i in range(len(val)):\n        while num >= val[i]:\n      \
+    \      roman_numeral += syms[i]\n            num -= val[i]\n    return roman_numeral"
+  task_id: UserEval/6
+- completion: "def parse_nested_parens(s):\n    groups = s.split()\n    depths = []\n\
+    \    \n    for group in groups:\n        max_depth = 0\n        current_depth\
+    \ = 0\n        \n        for char in group:\n            if char == '(':\n   \
+    \             current_depth += 1\n                max_depth = max(max_depth, current_depth)\n\
+    \            elif char == ')':\n                current_depth -= 1\n        \n\
+    \        depths.append(max_depth)\n    \n    return depths"
+  task_id: UserEval/7
+- completion: "def encode(message):\n    vowels = 'aeiouAEIOU'\n    encoded_message\
+    \ = []\n    \n    for char in message:\n        # Swap case\n        if char.isalpha():\n\
+    \            swapped_char = char.swapcase()\n            # Replace vowels\n  \
+    \          if swapped_char in vowels:\n                # Find the next vowel position\
+    \ (2 ahead in the alphabet)\n                if swapped_char.islower():\n    \
+    \                new_char = chr(((ord(swapped_char) - ord('a') + 2) % 26) + ord('a'))\n\
+    \                else:\n                    new_char = chr(((ord(swapped_char)\
+    \ - ord('A') + 2) % 26) + ord('A'))\n                encoded_message.append(new_char)\n\
+    \            else:\n                encoded_message.append(swapped_char)\n   \
+    \     else:\n            encoded_message.append(char)\n    \n    return ''.join(encoded_message)"
+  task_id: UserEval/8
+- completion: "def tribonacci(n):\n    def tri(n):\n        if n == 1:\n         \
+    \   return 3\n        elif n % 2 == 0:\n            return 1 + n // 2\n      \
+    \  else:\n            return tri(n - 1) + tri(n - 2) + tri(n + 1)\n\n    return\
+    \ [tri(i) for i in range(n + 1)]"
+  task_id: UserEval/9
+- completion: "def words_string(s):\n    # Split the string by commas and spaces,\
+    \ and filter out any empty strings\n    return [word for word in s.replace(',',\
+    \ ' ').split() if word]"
+  task_id: UserEval/10

@@ -1,6 +1,6 @@
 # 2023_study
 
-The LLM inference stuff is in `fast.py`. 
+The LLM inference stuff is in `perf scripts/fast.py`. 
 
 The rest of the stuff is mainly LLMOps type stuff like:
 

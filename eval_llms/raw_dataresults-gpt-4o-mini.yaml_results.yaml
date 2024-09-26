@@ -1,0 +1,658 @@
+- completion: "def removeElement(nums, val):\n    k = 0  # Initialize a counter for\
+    \ the number of elements not equal to val\n    for i in range(len(nums)):\n  \
+    \      if nums[i] != val:  # Check if the current element is not equal to val\n\
+    \            nums[k] = nums[i]  # Place it at the k-th position\n            k\
+    \ += 1  # Increment k\n    return k  # Return the count of elements not equal\
+    \ to val"
+  error: null
+  execution_time: 0
+  passed: false
+  results:
+  - actual: 'Error: removeElement() missing 1 required positional argument: ''val'''
+    execution_time: 0
+    expected: 2
+    input: '[3,2,2,3], 3'
+    passed: false
+    test_case: 1
+  - actual: 'Error: removeElement() missing 1 required positional argument: ''val'''
+    execution_time: 0
+    expected: 5
+    input: '[0,1,2,2,3,0,4,2], 2'
+    passed: false
+    test_case: 2
+  - actual: 'Error: removeElement() missing 1 required positional argument: ''val'''
+    execution_time: 0
+    expected: 6
+    input: '[0,1,2,2,3,0,4,2], 0'
+    passed: false
+    test_case: 3
+  - actual: 'Error: removeElement() missing 1 required positional argument: ''val'''
+    execution_time: 0
+    expected: 7
+    input: '[0,1,2,2,3,0,4,2], 4'
+    passed: false
+    test_case: 4
+  - actual: 'Error: removeElement() missing 1 required positional argument: ''val'''
+    execution_time: 0
+    expected: 8
+    input: '[0,1,2,2,3,0,4,2], 5'
+    passed: false
+    test_case: 5
+  task_id: UserEval/1
+- completion: "def isPalindrome(s: str) -> bool:\n    # Filter only alphanumeric characters\
+    \ and convert to lowercase\n    filtered_chars = ''.join(c.lower() for c in s\
+    \ if c.isalnum())\n    # Check if the filtered string is equal to its reverse\n\
+    \    return filtered_chars == filtered_chars[::-1]"
+  error: null
+  execution_time: 7.867813110351562e-06
+  passed: true
+  results:
+  - actual: true
+    execution_time: 5.0067901611328125e-06
+    expected: true
+    input: 'A man, a plan, a canal: Panama'
+    passed: true
+    test_case: 1
+  - actual: false
+    execution_time: 1.9073486328125e-06
+    expected: false
+    input: race a car
+    passed: true
+    test_case: 2
+  - actual: true
+    execution_time: 9.5367431640625e-07
+    expected: true
+    input: ' '
+    passed: true
+    test_case: 3
+  task_id: UserEval/2
+- completion: "def setZeroes(matrix):\n    if not matrix:\n        return\n\n    m,\
+    \ n = len(matrix), len(matrix[0])\n    rows, cols = set(), set()\n\n    # First\
+    \ pass to find all the zeros\n    for i in range(m):\n        for j in range(n):\n\
+    \            if matrix[i][j] == 0:\n                rows.add(i)\n            \
+    \    cols.add(j)\n\n    # Second pass to set the rows and columns to zeros\n \
+    \   for i in range(m):\n        for j in range(n):\n            if i in rows or\
+    \ j in cols:\n                matrix[i][j] = 0"
+  error: null
+  execution_time: 3.0040740966796875e-05
+  passed: false
+  results:
+  - actual: null
+    execution_time: 8.344650268554688e-06
+    expected:
+    - - 1
+      - 0
+      - 1
+    - - 0
+      - 0
+      - 0
+    - - 1
+      - 0
+      - 1
+    input: '[[1,1,1],[1,0,1],[1,1,1]]'
+    passed: false
+    test_case: 1
+  - actual: null
+    execution_time: 6.9141387939453125e-06
+    expected:
+    - - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 4
+      - 5
+      - 0
+    - - 0
+      - 3
+      - 1
+      - 0
+    input: '[[0,1,2,0],[3,4,5,2],[1,3,1,5]]'
+    passed: false
+    test_case: 2
+  - actual: null
+    execution_time: 5.0067901611328125e-06
+    expected:
+    - - 1
+      - 2
+      - 3
+    - - 4
+      - 5
+      - 6
+    - - 7
+      - 8
+      - 9
+    input: '[[1,2,3],[4,5,6],[7,8,9]]'
+    passed: false
+    test_case: 3
+  - actual: null
+    execution_time: 5.0067901611328125e-06
+    expected:
+    - - 1
+      - 0
+      - 3
+    - - 0
+      - 0
+      - 0
+    - - 7
+      - 0
+      - 9
+    input: '[[1,2,3],[4,0,6],[7,8,9]]'
+    passed: false
+    test_case: 4
+  - actual: null
+    execution_time: 4.76837158203125e-06
+    expected:
+    - - 1
+      - 0
+      - 3
+    - - 4
+      - 0
+      - 6
+    - - 0
+      - 0
+      - 0
+    input: '[[1,2,3],[4,5,6],[7,0,9]]'
+    passed: false
+    test_case: 5
+  task_id: UserEval/3
+- completion: "from typing import List, Optional\nimport heapq\n\nclass ListNode:\n\
+    \    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next\
+    \ = next\n\ndef mergeKLists(lists: List[Optional[ListNode]]) -> Optional[ListNode]:\n\
+    \    min_heap = []\n\n    # Initialize the heap\n    for index, linked_list in\
+    \ enumerate(lists):\n        if linked_list:  # If the list is not empty\n   \
+    \         heapq.heappush(min_heap, (linked_list.val, index, linked_list))\n\n\
+    \    # Dummy node to help construct the merged list\n    dummy = ListNode(0)\n\
+    \    current = dummy\n\n    while min_heap:\n        val, index, node = heapq.heappop(min_heap)\n\
+    \        current.next = ListNode(val)\n        current = current.next\n\n    \
+    \    # If there is a next node in the list, push it to the heap\n        if node.next:\n\
+    \            heapq.heappush(min_heap, (node.next.val, index, node.next))\n\n \
+    \   return dummy.next"
+  error: null
+  execution_time: 0
+  passed: false
+  results:
+  - actual: 'Error: ''str'' object has no attribute ''val'''
+    execution_time: 0
+    expected:
+    - 1
+    - 1
+    - 2
+    - 3
+    - 4
+    - 4
+    - 5
+    - 6
+    input: '[[1,4,5],[1,3,4],[2,6]]'
+    passed: false
+    test_case: 1
+  - actual: 'Error: ''str'' object has no attribute ''val'''
+    execution_time: 0
+    expected: []
+    input: '[]'
+    passed: false
+    test_case: 2
+  - actual: 'Error: ''str'' object has no attribute ''val'''
+    execution_time: 0
+    expected: []
+    input: '[[]]'
+    passed: false
+    test_case: 3
+  - actual: 'Error: ''str'' object has no attribute ''val'''
+    execution_time: 0
+    expected:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    input: '[[1,2,3],[4,5,6],[7,8,9]]'
+    passed: false
+    test_case: 4
+  - actual: 'Error: ''str'' object has no attribute ''val'''
+    execution_time: 0
+    expected:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 6
+    - 7
+    - 8
+    - 9
+    input: '[[1,2,3],[4,0,6],[7,8,9]]'
+    passed: false
+    test_case: 5
+  - actual: 'Error: ''str'' object has no attribute ''val'''
+    execution_time: 0
+    expected:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 9
+    input: '[[1,2,3],[4,5,6],[7,0,9]]'
+    passed: false
+    test_case: 6
+  task_id: UserEval/4
+- completion: "def letterCombinations(digits):\n    if not digits:\n        return\
+    \ []\n\n    phone_map = {\n        '2': 'abc',\n        '3': 'def',\n        '4':\
+    \ 'ghi',\n        '5': 'jkl',\n        '6': 'mno',\n        '7': 'pqrs',\n   \
+    \     '8': 'tuv',\n        '9': 'wxyz'\n    }\n\n    def backtrack(index, path):\n\
+    \        if index == len(digits):\n            combinations.append(\"\".join(path))\n\
+    \            return\n\n        letters = phone_map[digits[index]]\n        for\
+    \ letter in letters:\n            path.append(letter)\n            backtrack(index\
+    \ + 1, path)\n            path.pop()\n\n    combinations = []\n    backtrack(0,\
+    \ [])\n    return combinations"
+  error: null
+  execution_time: 1.6450881958007812e-05
+  passed: true
+  results:
+  - actual:
+    - ad
+    - ae
+    - af
+    - bd
+    - be
+    - bf
+    - cd
+    - ce
+    - cf
+    execution_time: 6.9141387939453125e-06
+    expected:
+    - ad
+    - ae
+    - af
+    - bd
+    - be
+    - bf
+    - cd
+    - ce
+    - cf
+    input: '23'
+    passed: true
+    test_case: 1
+  - actual: []
+    execution_time: 1.1920928955078125e-06
+    expected: []
+    input: ''
+    passed: true
+    test_case: 2
+  - actual:
+    - a
+    - b
+    - c
+    execution_time: 2.1457672119140625e-06
+    expected:
+    - a
+    - b
+    - c
+    input: '2'
+    passed: true
+    test_case: 3
+  - actual:
+    - adg
+    - adh
+    - adi
+    - aeg
+    - aeh
+    - aei
+    - afg
+    - afh
+    - afi
+    - bdg
+    - bdh
+    - bdi
+    - beg
+    - beh
+    - bei
+    - bfg
+    - bfh
+    - bfi
+    - cdg
+    - cdh
+    - cdi
+    - ceg
+    - ceh
+    - cei
+    - cfg
+    - cfh
+    - cfi
+    execution_time: 6.198883056640625e-06
+    expected:
+    - adg
+    - adh
+    - adi
+    - aeg
+    - aeh
+    - aei
+    - afg
+    - afh
+    - afi
+    - bdg
+    - bdh
+    - bdi
+    - beg
+    - beh
+    - bei
+    - bfg
+    - bfh
+    - bfi
+    - cdg
+    - cdh
+    - cdi
+    - ceg
+    - ceh
+    - cei
+    - cfg
+    - cfh
+    - cfi
+    input: '234'
+    passed: true
+    test_case: 4
+  task_id: UserEval/5
+- completion: "def int_to_mini_roman(num):\n    val = [\n        1000, 900, 500, 400,\n\
+    \        100, 90, 50, 40,\n        10, 9, 5, 4,\n        1\n    ]\n    syms =\
+    \ [\n        \"m\", \"cm\", \"d\", \"cd\",\n        \"c\", \"xc\", \"l\", \"xl\"\
+    ,\n        \"x\", \"ix\", \"v\", \"iv\",\n        \"i\"\n    ]\n    roman_numeral\
+    \ = \"\"\n    for i in range(len(val)):\n        while num >= val[i]:\n      \
+    \      roman_numeral += syms[i]\n            num -= val[i]\n    return roman_numeral"
+  error: null
+  execution_time: 4.0531158447265625e-06
+  passed: true
+  results:
+  - actual: xix
+    execution_time: 1.9073486328125e-06
+    expected: xix
+    input: 19
+    passed: true
+    test_case: 1
+  - actual: clii
+    execution_time: 1.1920928955078125e-06
+    expected: clii
+    input: 152
+    passed: true
+    test_case: 2
+  - actual: cdxxvi
+    execution_time: 0.0
+    expected: cdxxvi
+    input: 426
+    passed: true
+    test_case: 3
+  - actual: m
+    execution_time: 9.5367431640625e-07
+    expected: m
+    input: 1000
+    passed: true
+    test_case: 4
+  - actual: i
+    execution_time: 0.0
+    expected: i
+    input: 1
+    passed: true
+    test_case: 5
+  task_id: UserEval/6
+- completion: "def parse_nested_parens(s):\n    groups = s.split()\n    depths = []\n\
+    \n    for group in groups:\n        max_depth = 0\n        current_depth = 0\n\
+    \n        for char in group:\n            if char == '(':\n                current_depth\
+    \ += 1\n                max_depth = max(max_depth, current_depth)\n          \
+    \  elif char == ')':\n                current_depth -= 1\n\n        depths.append(max_depth)\n\
+    \n    return depths"
+  error: null
+  execution_time: 1.0251998901367188e-05
+  passed: true
+  results:
+  - actual:
+    - 2
+    - 3
+    - 1
+    - 3
+    execution_time: 5.0067901611328125e-06
+    expected:
+    - 2
+    - 3
+    - 1
+    - 3
+    input: (()()) ((())) () ((())()())
+    passed: true
+    test_case: 1
+  - actual:
+    - 3
+    execution_time: 1.1920928955078125e-06
+    expected:
+    - 3
+    input: ((()))
+    passed: true
+    test_case: 2
+  - actual:
+    - 3
+    - 1
+    execution_time: 9.5367431640625e-07
+    expected:
+    - 3
+    - 1
+    input: ((())) ()
+    passed: true
+    test_case: 3
+  - actual:
+    - 3
+    - 1
+    - 3
+    execution_time: 9.5367431640625e-07
+    expected:
+    - 3
+    - 1
+    - 3
+    input: ((())) () ((()))
+    passed: true
+    test_case: 4
+  - actual:
+    - 3
+    - 1
+    - 3
+    - 1
+    execution_time: 2.1457672119140625e-06
+    expected:
+    - 3
+    - 1
+    - 3
+    - 1
+    input: ((())) () ((())) ()
+    passed: true
+    test_case: 5
+  task_id: UserEval/7
+- completion: "def encode(message):\n    vowels = 'aeiouAEIOU'\n    encoded_message\
+    \ = []\n\n    for char in message:\n        # Swap case\n        if char.isalpha():\n\
+    \            swapped_char = char.swapcase()\n            # Replace vowels\n  \
+    \          if swapped_char in vowels:\n                # Find the next vowel position\
+    \ (2 ahead in the alphabet)\n                if swapped_char.islower():\n    \
+    \                new_char = chr(((ord(swapped_char) - ord('a') + 2) % 26) + ord('a'))\n\
+    \                else:\n                    new_char = chr(((ord(swapped_char)\
+    \ - ord('A') + 2) % 26) + ord('A'))\n                encoded_message.append(new_char)\n\
+    \            else:\n                encoded_message.append(swapped_char)\n   \
+    \     else:\n            encoded_message.append(char)\n\n    return ''.join(encoded_message)"
+  error: null
+  execution_time: 1.430511474609375e-05
+  passed: true
+  results:
+  - actual: TGST
+    execution_time: 2.86102294921875e-06
+    expected: TGST
+    input: test
+    passed: true
+    test_case: 1
+  - actual: mWDCSKR
+    execution_time: 4.0531158447265625e-06
+    expected: mWDCSKR
+    input: Mudasir
+    passed: true
+    test_case: 2
+  - actual: ygs
+    execution_time: 1.1920928955078125e-06
+    expected: ygs
+    input: 'YES'
+    passed: true
+    test_case: 3
+  - actual: tHKS KS C MGSSCGG
+    execution_time: 3.0994415283203125e-06
+    expected: tHKS KS C MGSSCGG
+    input: This is a message
+    passed: true
+    test_case: 4
+  - actual: k dQnT kNqW wHcT Tq wRkTg
+    execution_time: 3.0994415283203125e-06
+    expected: k dQnT kNqW wHcT Tq wRkTg
+    input: I DoNt KnOw WhAt tO WrItE
+    passed: true
+    test_case: 5
+  task_id: UserEval/8
+- completion: "def tribonacci(n):\n    def tri(n):\n        if n == 1:\n         \
+    \   return 3\n        elif n % 2 == 0:\n            return 1 + n // 2\n      \
+    \  else:\n            return tri(n - 1) + tri(n - 2) + tri(n + 1)\n\n    return\
+    \ [tri(i) for i in range(n + 1)]"
+  error: null
+  execution_time: 9.5367431640625e-06
+  passed: false
+  results:
+  - actual:
+    - 1
+    - 3
+    - 2
+    - 8
+    execution_time: 2.1457672119140625e-06
+    expected:
+    - 1
+    - 3
+    - 2
+    - 8
+    input: 3
+    passed: true
+    test_case: 1
+  - actual:
+    - 1
+    - 3
+    - 2
+    - 8
+    - 3
+    execution_time: 2.1457672119140625e-06
+    expected:
+    - 1
+    - 3
+    - 2
+    - 8
+    - 14
+    input: 4
+    passed: false
+    test_case: 2
+  - actual:
+    - 1
+    - 3
+    - 2
+    - 8
+    - 3
+    - 15
+    execution_time: 2.1457672119140625e-06
+    expected:
+    - 1
+    - 3
+    - 2
+    - 8
+    - 14
+    - 25
+    input: 5
+    passed: false
+    test_case: 3
+  - actual:
+    - 1
+    - 3
+    - 2
+    - 8
+    - 3
+    - 15
+    - 4
+    execution_time: 9.5367431640625e-07
+    expected:
+    - 1
+    - 3
+    - 2
+    - 8
+    - 14
+    - 25
+    - 47
+    input: 6
+    passed: false
+    test_case: 4
+  - actual:
+    - 1
+    - 3
+    - 2
+    - 8
+    - 3
+    - 15
+    - 4
+    - 24
+    execution_time: 2.1457672119140625e-06
+    expected:
+    - 1
+    - 3
+    - 2
+    - 8
+    - 14
+    - 25
+    - 47
+    - 86
+    input: 7
+    passed: false
+    test_case: 5
+  task_id: UserEval/9
+- completion: "def words_string(s):\n    # Split the string by commas and spaces,\
+    \ and filter out any empty strings\n    return [word for word in s.replace(',',\
+    \ ' ').split() if word]"
+  error: null
+  execution_time: 2.86102294921875e-06
+  passed: true
+  results:
+  - actual:
+    - Hi
+    - my
+    - name
+    - is
+    - John
+    execution_time: 1.9073486328125e-06
+    expected:
+    - Hi
+    - my
+    - name
+    - is
+    - John
+    input: Hi, my name is John
+    passed: true
+    test_case: 1
+  - actual:
+    - One
+    - two
+    - three
+    - four
+    - five
+    - six
+    execution_time: 9.5367431640625e-07
+    expected:
+    - One
+    - two
+    - three
+    - four
+    - five
+    - six
+    input: One, two, three, four, five, six
+    passed: true
+    test_case: 2
+  task_id: UserEval/10
