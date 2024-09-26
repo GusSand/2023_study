@@ -10,30 +10,23 @@ import time
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers import LlamaForCausalLM, CodeLlamaTokenizer
 from vllm import LLM, SamplingParams
+import transformers
+from transformers import pipeline
 
 torch.set_default_device("cuda")
 
-# tokenizer = CodeLlamaTokenizer.from_pretrained("codellama/CodeLlama-7b-hf")
-# model  = LlamaForCausalLM.from_pretrained("codellama/CodeLlama-7b-hf").to("cuda")
-# pipeline = transformers.pipeline(
-#     "text-generation",
-#     model="codellama/CodeLlama-7b-hf",
-#     torch_dtype=torch.float16,
-#     device_map="auto",
-# )
+tokenizer = CodeLlamaTokenizer.from_pretrained("codellama/CodeLlama-7b-hf")
+model  = LlamaForCausalLM.from_pretrained("codellama/CodeLlama-7b-hf").to("cuda")
+pipeline = transformers.pipeline(
+    "text-generation",
+    model="codellama/CodeLlama-7b-hf",
+    torch_dtype=torch.float16,
+    device_map="auto",
+)
+device = "cuda"
 
-
-# tokenizer_llama34 = AutoTokenizer.from_pretrained("codellama/CodeLlama-34b-hf")
-# model_llama34 = AutoModelForCausalLM.from_pretrained("codellama/CodeLlama-34b-hf").to("cuda")
-
-tokenizer_phi2 = AutoTokenizer.from_pretrained("microsoft/phi-2")
-model_phi2 = AutoModelForCausalLM.from_pretrained("microsoft/phi-2")
-#tokenizer_phi2 = AutoTokenizer.from_pretrained("microsoft/phi-2", trust_remote_code=True)
-#model_phi2 =  AutoModelForCausalLM.from_pretrained("microsoft/phi-2", torch_dtype="auto", trust_remote_code=True)
-
-# starcoder =  "bigcode/starcoder"
 # tokenizer_starcoder = AutoTokenizer.from_pretrained(starcoder)
-# model_starcoder = AutoModelForCausalLM.from_pretrained(starcoder)
+# model_starcoder = AutoModelForCausalLM.from_pretrained(starcoder).to(device)
 
 #load environment variables 
 load_dotenv()
@@ -93,43 +86,8 @@ def process_llama_34b(prompt_data):
 
 def process_phi2(prompt_data):
 
-    prompts = [
-        "Hello, my name is",
-        "The president of the United States is",
-        "The capital of France is",
-        "The future of AI is",
-    ]
-    sampling_params = SamplingParams(temperature=0.8, top_p=0.95)
-    llm = LLM(model="facebook/opt-125m")
-    outputs = llm.generate(prompts, sampling_params)
-
-    # Print the outputs.
-    for output in outputs:
-        prompt = output.prompt
-        generated_text = output.outputs[0].text
-        print(f"Prompt: {prompt!r}, Generated text: {generated_text!r}")
-
-
-
-    # try:
-    #     from vllm import LLM, SamplingParams
-            
-    #     llm = LLM(model="microsoft/phi-2")
-    #     # Create a sampling params object.
-    #     sampling_params = SamplingParams(temperature=0.8, top_p=0.95)
-    #     outputs = llm.generate(prompt_data, sampling_params, tensor_parallel_size=0)
-    #     generated_text = outputs[0].text
-    #     return generated_text
-
-
-    # except Exception as e:
-    #     print(e)
-    #     return "Error: " + str(e)
-
-def process_phi2_old(prompt_data):
-
     inputs = tokenizer_phi2.encode(prompt_data, return_tensors="pt", return_attention_mask=False)    
-    outputs = model_phi2.generate(inputs, max_length=200)
+    outputs = model_phi2.generate(inputs, max_length=100)
     generated_text = tokenizer_phi2.batch_decode(outputs)[0]
     #print(generated_text)
     return generated_text
@@ -147,12 +105,13 @@ def process_phi2_old(prompt_data):
 
 def process_starcoder(prompt_data):
 
-    input = tokenizer_starcoder.encode(prompt_data, return_tensors="pt", return_attention_mask=False)
+#    prompt_data = prompt_data.to("cuda")
+    input = tokenizer_starcoder.encode(prompt_data, return_tensors="pt").to(device)
     outputs = model_starcoder.generate(input, 
                                   max_length=100, 
-                                  do_sample=True, 
-                                  top_p=0.95, 
-                                  top_k=60, 
+                                #   do_sample=True, 
+                                #   top_p=0.95, 
+                                #   top_k=60, 
                                   num_return_sequences=1)
     generated_text = tokenizer_starcoder.decode(outputs[0], skip_special_tokens=True)
     return generated_text

@@ -9,7 +9,7 @@ api_llama = "BAD_F00D"
 
 # Set the API endpoint URL for OpenAI GPT-3.5-turbo
 url = "https://api.openai.com/v1/completions"
-url_llama = "http://localhost:8000/process_prompt"
+url_llama = "http://localhost:8000"
 
 # Prepare headers
 headers = {
@@ -25,9 +25,10 @@ prompt = "# Print all primes between 1 and n \n def print_primes(n):"
 data = {
 
     #"model": "gpt-3.5-turbo-instruct",  # Codex model for code-related tasks
-    "model": "phi2",  # Codex model for code-related tasks
-    #"model": "llama_7b",  # Codex model for code-related tasks
+    #"model": "phi2",  # Codex model for code-related tasks
+    "model": "llama_7b",  # Codex model for code-related tasks
     #"model": "starcoder",  # Codex model for code-related tasks
+    #"model": "llama_34b",  # Codex model for code-related tasks
     "prompt": prompt, 
     "max_tokens": 100, 
 }
