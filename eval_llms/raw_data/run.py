@@ -24,7 +24,7 @@ load_dotenv(find_dotenv())
 URL = "https://api.openai.com/v1"
 URL_local = "http://localhost:1234/v1"
 
-client = OpenAI(base_url=URL)
+client = OpenAI(base_url=URL_local)
 
 HEADERS = {
     "Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}",
@@ -111,19 +111,23 @@ def get_results(model='gpt-4o-mini'):
     return out_file
 
 class CLI:
+    """
+    Run the evaluation pipeline.
+
+    Args: 
+        model (str): The model to use for generating completions. Default is 'gpt-4o-mini'.
+        generate_results (bool): Whether to run get_results. Default is False.
+        check_correctness (bool): Whether to check functional correctness. Default is True.
+        k (List[int]): The values of k for pass@k evaluation. Default is [1, 5, 10].
+        timeout (float): Timeout for evaluation in seconds. Default is 20.0.
+    """
     def run(self, 
             model='gpt-4o-mini', 
             generate_results=False, 
             check_correctness=True, 
             k: List[int] = [1, 5, 10],
             timeout: float = 20.0):
-        """
-        Run the evaluation pipeline.
-        
-        :param model: The model to use for generating completions.
-        :param get_results: Whether to run get_results.
-        :param check_correctness: Whether to check functional correctness.
-        """
+
         results_file = None
         if generate_results:
             results_file = get_results(model=model)
