@@ -7,7 +7,7 @@ from openai import OpenAI
 import yaml
 from evaluation import evaluate_functional_correctness
 import fire
-
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from tenacity import (
     retry,
     stop_after_attempt,
@@ -23,8 +23,9 @@ load_dotenv(find_dotenv())
 
 URL = "https://api.openai.com/v1"
 URL_local = "http://localhost:1234/v1"
+URL_BigBoyA100 = "http://184.105.3.216:8000/v1"
 
-client = OpenAI(base_url=URL_local)
+client = OpenAI(base_url=URL_BigBoyA100)
 
 HEADERS = {
     "Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}",
@@ -40,14 +41,32 @@ pattern = re.compile(r'```(?:[Pp]ython|[Pp]y)\s*([\s\S]+?)\s*```')
 @retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(6))
 def get_completion(task, model='gpt-3.5-turbo'):
     prompt = task['prompt'] + "\n#Complete the function using python code only:\n"
-    completion = client.chat.completions.create(
-    model=model,
-    messages=[
-        {"role": "system", "content": "You are an intelligent . You must complete the python function given to you by the user. And you must follow the format they present when giving your answer!"},
-        {"role": "user", "content": prompt}]
-    )
 
-    result = (completion.choices[0].message.content)
+    if model.startswith('gpt-') or model.startswith('text-davinci-'):
+        # Use OpenAI API
+        client = OpenAI(base_url=URL_BigBoyA100)
+        completion = client.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": "You are an intelligent assistant. You must complete the python function given to you by the user. And you must follow the format they present when giving your answer!"},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.7,
+            max_tokens=2048,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0
+        )
+        result = completion.choices[0].message.content
+    else:
+        # Use local model with Hugging Face transformers
+        tokenizer = AutoTokenizer.from_pretrained(model)
+        model = AutoModelForCausalLM.from_pretrained(model)
+        
+        pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, device=0)  # Use the first GPU
+        
+        result = pipe(prompt, max_new_tokens=2048, temperature=0.7, top_p=1, do_sample=True)[0]['generated_text']
+
     match = pattern.search(result)
     
     if match:
@@ -75,8 +94,8 @@ def process_command(task, model):
 
 
 def get_results(model='gpt-4o-mini'):
-    out_file = OUT_FILE.format(model)
-
+    out_file = os.path.join('raw_data', f'results-{model}.yaml')
+    os.makedirs(os.path.dirname(out_file), exist_ok=True)
     results = []
     batch_size = 15
     batch = []
@@ -111,22 +130,20 @@ def get_results(model='gpt-4o-mini'):
     return out_file
 
 class CLI:
-    """
-    Run the evaluation pipeline.
-
-    Args: 
-        model (str): The model to use for generating completions. Default is 'gpt-4o-mini'.
-        generate_results (bool): Whether to run get_results. Default is False.
-        check_correctness (bool): Whether to check functional correctness. Default is True.
-        k (List[int]): The values of k for pass@k evaluation. Default is [1, 5, 10].
-        timeout (float): Timeout for evaluation in seconds. Default is 20.0.
-    """
     def run(self, 
             model='gpt-4o-mini', 
             generate_results=False, 
             check_correctness=True, 
             k: List[int] = [1, 5, 10],
             timeout: float = 20.0):
+        """
+            Args: 
+                model (str): The model to use for generating completions. Default is 'gpt-4o-mini'.
+                generate_results (bool): Whether to run get_results. Default is False.
+                check_correctness (bool): Whether to check functional correctness. Default is True.
+                k (List[int]): The values of k for pass@k evaluation. Default is [1, 5, 10].
+                timeout (float): Timeout for evaluation in seconds. Default is 20.0.
+        """
 
         results_file = None
         if generate_results:
@@ -148,5 +165,4 @@ class CLI:
 
 
 if __name__ == '__main__':
-
     fire.Fire(CLI)
