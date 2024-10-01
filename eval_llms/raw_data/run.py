@@ -13,10 +13,19 @@ from tenacity import (
     stop_after_attempt,
     wait_random_exponential,
 )
+import psutil
+import os
+import requests
+import traceback
 
 from typing import List
 from dotenv import load_dotenv, find_dotenv
 from concurrent.futures import ThreadPoolExecutor
+
+def print_memory_usage():
+    process = psutil.Process(os.getpid())
+    print(f"Memory usage: {process.memory_info().rss / 1024 / 1024:.2f} MB")
+
 
 
 load_dotenv(find_dotenv())
@@ -36,36 +45,37 @@ HUMAN_EVAL = 'eval.yaml'
 
 OUT_FILE = os.environ['PWD'] + 'results-{}.yaml'
 
+client = OpenAI(
+    base_url=URL_BigBoyA100, 
+    api_key=os.environ['OPENAI_API_KEY'])
+
 
 pattern = re.compile(r'```(?:[Pp]ython|[Pp]y)\s*([\s\S]+?)\s*```')
 @retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(6))
 def get_completion(task, model='gpt-3.5-turbo'):
     prompt = task['prompt'] + "\n#Complete the function using python code only:\n"
 
-    if model.startswith('gpt-') or model.startswith('text-davinci-'):
-        # Use OpenAI API
-        client = OpenAI(base_url=URL_BigBoyA100)
-        completion = client.chat.completions.create(
+    #client = OpenAI(base_url=URL_BigBoyA100, api_key="dummy")  # vLLM doesn't need a real API key
+    try:
+        completion = client.completions.create(
             model=model,
-            messages=[
-                {"role": "system", "content": "You are an intelligent assistant. You must complete the python function given to you by the user. And you must follow the format they present when giving your answer!"},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.7,
-            max_tokens=2048,
-            top_p=1,
-            frequency_penalty=0,
-            presence_penalty=0
+        #     messages=[
+        #         {"role": "system", "content": "You are an intelligent assistant. You must complete the python function given to you by the user. And you must follow the format they present when giving your answer!"},
+        #         {"role": "user", "content": prompt}
+        # ],
+        prompt=prompt,
+        temperature=0.7,
+        max_tokens=2048,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0
         )
-        result = completion.choices[0].message.content
-    else:
-        # Use local model with Hugging Face transformers
-        tokenizer = AutoTokenizer.from_pretrained(model)
-        model = AutoModelForCausalLM.from_pretrained(model)
-        
-        pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, device=0)  # Use the first GPU
-        
-        result = pipe(prompt, max_new_tokens=2048, temperature=0.7, top_p=1, do_sample=True)[0]['generated_text']
+        #result = completion.choices[0].message.content
+        result = completion.choices[0].text 
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        print("Full traceback:")
+        traceback.print_exc()
 
     match = pattern.search(result)
     
