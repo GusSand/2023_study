@@ -1,0 +1,106 @@
+- completion: "def removeElement(nums, val):\n    k = 0  # Counter for valid elements\n\
+    \    \n    # Iterate over each element in the list\n    for i in range(len(nums)):\n\
+    \        # If the current element is not equal to the value to remove\n      \
+    \  if nums[i] != val:\n            # Place the valid element at the index k\n\
+    \            nums[k] = nums[i]\n            # Increment the counter\n        \
+    \    k += 1\n            \n    return k\n\n# Example usage:\nnums1 = [3, 2, 2,\
+    \ 3]\nval1 = 3\nk1 = removeElement(nums1, val1)\nprint(k1, nums1[:k1])  # Output:\
+    \ 2 [2, 2]\n\nnums2 = [0, 1, 2, 2, 3, 0, 4, 2]\nval2 = 2\nk2 = removeElement(nums2,\
+    \ val2)\nprint(k2, nums2[:k2])  # Output: 5 [0, 1, 3, 0, 4]"
+  task_id: UserEval/1
+- completion: "def isPalindrome(s: str) -> bool:\n    # Convert the string to lowercase\
+    \ and filter out non-alphanumeric characters\n    filtered_string = ''.join(char.lower()\
+    \ for char in s if char.isalnum())\n    # Check if the filtered string is the\
+    \ same forwards and backwards\n    return filtered_string == filtered_string[::-1]\n\
+    \n# Example 1\nprint(isPalindrome(\"A man, a plan, a canal: Panama\"))  # Output:\
+    \ true\n\n# Example 2\nprint(isPalindrome(\"race a car\"))  # Output: false\n\n\
+    # Example 3\nprint(isPalindrome(\" \"))  # Output: true"
+  task_id: UserEval/2
+- completion: "def setZeroes(matrix):\n    m, n = len(matrix), len(matrix[0])\n  \
+    \  rows, cols = set(), set()\n\n    # First pass to record the rows and columns\
+    \ that are to be zeroed\n    for i in range(m):\n        for j in range(n):\n\
+    \            if matrix[i][j] == 0:\n                rows.add(i)\n            \
+    \    cols.add(j)\n\n    # Second pass to set the appropriate rows and columns\
+    \ to zero\n    for i in range(m):\n        for j in range(n):\n            if\
+    \ i in rows or j in cols:\n                matrix[i][j] = 0\n    return matrix\n\
+    \n# Example Usage\nmatrix1 = [[1,1,1],[1,0,1],[1,1,1]]\nmatrix2 = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]\n\
+    print(setZeroes(matrix1))  # Output: [[1,0,1],[0,0,0],[1,0,1]]\nprint(setZeroes(matrix2))\
+    \  # Output: [[0,0,0,0],[0,4,5,0],[0,3,1,0]]"
+  task_id: UserEval/3
+- completion: "class ListNode:\n    def __init__(self, val=0, next=None):\n      \
+    \  self.val = val\n        self.next = next\n\nimport heapq\n\ndef mergeKLists(lists):\n\
+    \    if not lists or len(lists) == 0:\n        return None\n    \n    # Min-heap\
+    \ to store the heads of the linked lists\n    min_heap = []\n    \n    # Initialize\
+    \ the heap with the head of each linked list\n    for i, l in enumerate(lists):\n\
+    \        if l:\n            heapq.heappush(min_heap, (l.val, i, l))\n    \n  \
+    \  # Dummy head for the result linked list\n    dummy = ListNode()\n    current\
+    \ = dummy\n    \n    while min_heap:\n        # Extract the smallest element from\
+    \ the heap\n        val, i, node = heapq.heappop(min_heap)\n        current.next\
+    \ = node\n        current = current.next\n        \n        # If there is a next\
+    \ node, add it to the heap\n        if node.next:\n            heapq.heappush(min_heap,\
+    \ (node.next.val, i, node.next))\n    \n    return dummy.next\n\n# Helper function\
+    \ to convert a list to linked list\ndef list_to_linkedlist(arr):\n    dummy =\
+    \ ListNode()\n    current = dummy\n    for num in arr:\n        current.next =\
+    \ ListNode(num)\n        current = current.next\n    return dummy.next\n\n# Helper\
+    \ function to convert a linked list to list\ndef linkedlist_to_list(node):\n \
+    \   result = []\n    while node:\n        result.append(node.val)\n        node\
+    \ = node.next\n    return result\n\n# Example 1:\nlists = [[1,4,5],[1,3,4],[2,6]]\n\
+    linked_lists = [list_to_linkedlist(l) for l in lists]\nmerged_head = mergeKLists(linked_lists)\n\
+    print(linkedlist_to_list(merged_head)) # Output: [1,1,2,3,4,4,5,6]\n\n# Example\
+    \ 2:\nlists = []\nlinked_lists = [list_to_linkedlist(l) for l in lists]\nmerged_head\
+    \ = mergeKLists(linked_lists)\nprint(linkedlist_to_list(merged_head)) # Output:\
+    \ []\n\n# Example 3:\nlists = [[]]\nlinked_lists = [list_to_linkedlist(l) for\
+    \ l in lists]\nmerged_head = mergeKLists(linked_lists)\nprint(linkedlist_to_list(merged_head))\
+    \ # Output: []"
+  task_id: UserEval/4
+- completion: "def letterCombinations(digits):\n    if not digits:\n        return\
+    \ []\n    \n    mapping = {\n        '2': 'abc', '3': 'def', '4': 'ghi', '5':\
+    \ 'jkl', '6': 'mno',\n        '7': 'pqrs', '8': 'tuv', '9': 'wxyz'\n    }\n  \
+    \  \n    def backtrack(index, path):\n        if index == len(digits):\n     \
+    \       combinations.append(\"\".join(path))\n            return\n        possible_letters\
+    \ = mapping[digits[index]]\n        for letter in possible_letters:\n        \
+    \    path.append(letter)\n            backtrack(index + 1, path)\n           \
+    \ path.pop()\n\n    combinations = []\n    backtrack(0, [])\n    return combinations"
+  task_id: UserEval/5
+- completion: "def int_to_mini_roman(num):\n    val = [\n        1000, 900, 500, 400,\n\
+    \        100, 90, 50, 40,\n        10, 9, 5, 4,\n        1\n    ]\n    syb = [\n\
+    \        \"m\", \"cm\", \"d\", \"cd\",\n        \"c\", \"xc\", \"l\", \"xl\",\n\
+    \        \"x\", \"ix\", \"v\", \"iv\",\n        \"i\"\n    ]\n    roman_num =\
+    \ ''\n    i = 0\n    while num > 0:\n        for _ in range(num // val[i]):\n\
+    \            roman_num += syb[i]\n            num -= val[i]\n        i += 1\n\
+    \    return roman_num"
+  task_id: UserEval/6
+- completion: "def parse_nested_parens(input_str):\n    result = []\n    groups =\
+    \ input_str.split()\n    \n    for group in groups:\n        max_depth = 0\n \
+    \       current_depth = 0\n        \n        for char in group:\n            if\
+    \ char == '(':\n                current_depth += 1\n                if current_depth\
+    \ > max_depth:\n                    max_depth = current_depth\n            elif\
+    \ char == ')':\n                current_depth -= 1\n        \n        result.append(max_depth)\n\
+    \    \n    return result\n\n# Example usage:\n# print(parse_nested_parens('(()())\
+    \ ((())) () ((())()())'))  # Should output [2, 3, 1, 3]"
+  task_id: UserEval/7
+- completion: "def encode(message):\n    def shift_vowel(ch):\n        vowels = 'aeiou'\n\
+    \        shifted_vowels = {vowel: chr((ord(vowel) - ord('a') + 2) % 26 + ord('a'))\
+    \ for vowel in vowels}\n        shifted_vowels.update({vowel.upper(): shifted_vowels[vowel].upper()\
+    \ for vowel in vowels})\n        return shifted_vowels.get(ch, ch)\n    \n   \
+    \ encoded_message = ''\n    for ch in message:\n        if ch.isalpha():\n   \
+    \         ch = shift_vowel(ch)\n            ch = ch.swapcase()\n        encoded_message\
+    \ += ch\n\n    return encoded_message\n\n# Test cases\nprint(encode('test')) \
+    \ # Expected: 'TGST'\nprint(encode('This is a message'))  # Expected: 'tHKS KS\
+    \ C MGSSCGG'"
+  task_id: UserEval/8
+- completion: "def tribonacci_sequence(n):\n    if n < 0:\n        return []\n\n \
+    \   # Initialize the sequence with the base case\n    sequence = [1, 3]\n    \n\
+    \    for i in range(2, n + 1):    \n        if i % 2 == 0:\n            sequence.append(1\
+    \ + i // 2)\n        else:\n            val = sequence[i - 1] + sequence[i - 2]\
+    \ + (1 + (i + 1) // 2) if ((i + 1) % 2 == 0) else sequence[i - 1] + sequence[i\
+    \ - 2] + sequence[i]\n            sequence.append(val)\n            \n    return\
+    \ sequence[:n + 1]\n\n# Example usage\nprint(tribonacci_sequence(3)) # Output:\
+    \ [1, 3, 2, 8]"
+  task_id: UserEval/9
+- completion: "def words_string(s):\n    import re\n    return re.split(r'[,\\s]+',\
+    \ s.strip(' ,'))\n\n# Example usage\nprint(words_string(\"Hi, my name is John\"\
+    ))  # [\"Hi\", \"my\", \"name\", \"is\", \"John\"]\nprint(words_string(\"One,\
+    \ two, three, four, five, six\"))  # [\"One\", \"two\", \"three\", \"four\", \"\
+    five\", \"six\"]"
+  task_id: UserEval/10

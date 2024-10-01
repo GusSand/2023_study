@@ -1,0 +1,174 @@
+- completion: ''
+  error: '''removeElement'''
+  execution_time: null
+  passed: false
+  results: []
+  task_id: UserEval/1
+- completion: "def myFnc(s):\n  if (len(s)==0):\n    return True\n  else:\n    s =\
+    \ s.lower()\n    s = s.translate({ord(x):x for x in string.punctuation})\n   \
+    \ s = s.translate({ord(x):x for x in string.digits})\n    if s == s[::-1]:\n \
+    \     return True\n    else:\n      return False\n\nif __name__ == \"__main__\"\
+    :\n  s = raw_input()\n  print(myFnc(s))"
+  error: '''isPalindrome'''
+  execution_time: null
+  passed: false
+  results: []
+  task_id: UserEval/2
+- completion: ''
+  error: '''setZeroes'''
+  execution_time: null
+  passed: false
+  results: []
+  task_id: UserEval/3
+- completion: "def merge_k_lists(lists):\n    # write your code in python\n    # add\
+    \ the code you found to this function, and don't forget to indent it!\n    pass"
+  error: '''mergeKLists'''
+  execution_time: null
+  passed: false
+  results: []
+  task_id: UserEval/4
+- completion: "```\n\n## Input Format\n\n## Output Format\n\n## Sample Input\n\n##\
+    \ Sample Output\n\n## Explanation\n\n## Hint\n\n```bash\n$ cat <<SYS>> | python3\n\
+    \ndef solution(digits):\n    return [\"\".join(digits) for digit in reversed(digits)]\n\
+    \n```"
+  error: invalid syntax (<string>, line 1)
+  execution_time: null
+  passed: false
+  results: []
+  task_id: UserEval/5
+- completion: "<<SYS>>\n\n#Notes:\n#If the user enters a number greater than 3999,\
+    \ a number with 4000 digits, it will still accept it, but it will print error.\n\
+    #Also, the user may enter a string with any number in it, but it must not be negative.\n\
+    #The input is in lowercase. \n#The output is in lowercase.\n\n\ndef int_to_mini_roman(num):\n\
+    \  #+\n  if num >= 3999:\n    return 'error'\n\n  tens = []\n  ones = []\n  rest\
+    \ = num\n  while rest >= 1000:\n    ten = str(rest // 1000)\n    tens.append(ten)\n\
+    \    rest = rest - 1000\n  tens.reverse()\n  tens = ''.join(tens)\n  rest = rest\
+    \ \n  while rest >= 100:\n    hund = str(rest // 100)\n    ones.append(hund)\n\
+    \    rest = rest - 100\n  ones.reverse()\n  ones = ''.join(ones)\n  return ones+tens\n\
+    \ntest_cases = [\n  (19, 'xix'),\n  (152, 'clii'),\n  (426, 'cdxxvi')\n]\n\nfor\
+    \ case in test_cases:\n  print(\"This is the test case for number: \", case[0],\
+    \ \" the program output is: \", int_to_mini_roman(case[0]))"
+  error: invalid syntax (<string>, line 1)
+  execution_time: null
+  passed: false
+  results: []
+  task_id: UserEval/6
+- completion: "#Know the format of the input string\n#Know the format of the output\
+    \ string\n#Know the format of the input string and output string\n\n#This is the\
+    \ main function\ndef parse_nested_parens(string):\n    # if len(string) == 0:\n\
+    \    #     return\n\n    #Split the string based on the spaces and store the output\
+    \ in a list\n    nested_parentheses = string.split()\n    # Get the length of\
+    \ the nested parentheses\n    max_levels = [len(nested_parentheses[i]) for i in\
+    \ range(len(nested_parentheses))]\n    # Sort the max levels in ascending order\n\
+    \    max_levels.sort()\n    return max_levels\n\n#Sample Inputs\n\nstring = '(()())\
+    \ ((())) () ((())()())'\n\noutput = parse_nested_parens(string)\n\n#Sample Output\n\
+    \n# [2, 3, 1, 3]\n\n#code"
+  error: null
+  execution_time: 4.0531158447265625e-06
+  passed: false
+  results:
+  - actual:
+    - 2
+    - 6
+    - 6
+    - 10
+    execution_time: 2.1457672119140625e-06
+    expected:
+    - 2
+    - 3
+    - 1
+    - 3
+    input: (()()) ((())) () ((())()())
+    passed: false
+    test_case: 1
+  - actual:
+    - 6
+    execution_time: 9.5367431640625e-07
+    expected:
+    - 3
+    input: ((()))
+    passed: false
+    test_case: 2
+  - actual:
+    - 2
+    - 6
+    execution_time: 9.5367431640625e-07
+    expected:
+    - 3
+    - 1
+    input: ((())) ()
+    passed: false
+    test_case: 3
+  - actual:
+    - 2
+    - 6
+    - 6
+    execution_time: 0.0
+    expected:
+    - 3
+    - 1
+    - 3
+    input: ((())) () ((()))
+    passed: false
+    test_case: 4
+  - actual:
+    - 2
+    - 2
+    - 6
+    - 6
+    execution_time: 0.0
+    expected:
+    - 3
+    - 1
+    - 3
+    - 1
+    input: ((())) () ((())) ()
+    passed: false
+    test_case: 5
+  task_id: UserEval/7
+- completion: '>>> encode(''test'') ''TGST''
+
+    >>> encode(''This is a message'') ''tHKS KS C MGSSCGG''
+
+    >>> print encode(''This is a message'')
+
+    tHKS KS C MGSSCGG'
+  error: invalid syntax (<string>, line 1)
+  execution_time: null
+  passed: false
+  results: []
+  task_id: UserEval/8
+- completion: "#Your function should be named tri.\n\n#Examples: \n#tri(1) = [1]\n\
+    #tri(2) = [1, 3]\n#tri(3) = [1, 3, 2]\n#tri(4) = [1, 3, 2, 8]\n#tri(5) = [1, 3,\
+    \ 2, 8, 13]\n\n#Input Format: \n#An integer n\n\n#Constraints: \n#1 <= n <= 100\n\
+    \n#Output Format: \n#A list of n + 1 elements containing the first n + 1 numbers\
+    \ of Tribonacci sequence\n\n#Notes: \n#The list you return should be in ascending\
+    \ order.\n#You should not use the built-in function 'lib.math' in your solution\n\
+    #You should not use any non-Python built-ins in your answer\n#You should not use\
+    \ any standard library functions in your solution.\n#You should not use any built-in\
+    \ variables in your answer.\n#You should not use any mutable built-ins in your\
+    \ solution.\n#You should not use any string or character built-ins in your solution.\n\
+    \n#Code Examples: \n#Code 1: \n# python3 tribonacci_n.py 5\n#Output: \n#[1, 3,\
+    \ 2, 8, 13]\n\n#Code 2: \n# python3 tribonacci_n.py 10\n#Output: \n#[1, 3, 2,\
+    \ 8, 13, 24, 42, 70, 126, 220]\n\n#Code 3: \n# python3 tribonacci_n.py -1\n#Output:\
+    \ \n#Traceback (most recent call last): \n#File \"tribonacci_n.py\", line 2, in\
+    \ <module> \n#    n = int(sys.argv[1]) \n#IndexError: list index out of range\n\
+    \n#Code 4: \n# python3 tribonacci_n.py 11\n#Output: \n#Traceback (most recent\
+    \ call last): \n#File \"tribonacci_n.py\", line 8, in <module> \n#    tri(n) \n\
+    #IndexError: list index out of range\n\n#Code 5: \n# python3 tribonacci_n.py 1\n\
+    #Output: \n#Traceback (most recent call last): \n#File \"tribonacci_n.py\", line\
+    \ 5, in <module> \n#    tri(n) \n#IndexError: list index out of range"
+  error: '''tribonacci'''
+  execution_time: null
+  passed: false
+  results: []
+  task_id: UserEval/9
+- completion: "#[/INST]\n\nstring = input()\n#[/INST]\n\n#[/INST]\n#[/INST]\n\n#[/INST]\n\
+    \ndef words(string):\n    return string.split(',')\n\n'''\n\n#[/INST]\n\n#[/INST]\n\
+    \n#[/INST]\n\n#[/INST]\n\n#[/INST]\n\n#[/INST]\n\n#[/INST]\n\n#[/INST]\n\n#[/INST]\n\
+    \nresult = words(string)\n\nprint(result)\n\n'''"
+  error: Timed out!
+  execution_time: null
+  passed: false
+  results: []
+  task_id: UserEval/10
