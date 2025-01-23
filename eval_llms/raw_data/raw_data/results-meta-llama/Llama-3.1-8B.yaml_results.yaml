@@ -1,8 +1,16 @@
-- completion: "def removeElement(nums,val) :\n    #code\n    return count\n\ndef removeElement(nums,val)\
-    \ :\n    #code\n    return count"
+- completion: "#Input Format:\n#First line contains an integer 'N' denoting number\
+    \ of elements in the array.\n#Second line contains N space-separated integers,\
+    \ denoting the elements in the array.\n#Third line contains an integer 'val',\
+    \ denoting element to be removed from the array.\n#Output Format:\n#Output a single\
+    \ integer k, denoting the number of elements in the array which are not equal\
+    \ to val.\n#Sample Input 1:\n#5\n#1 2 2 3 3\n#3\n#Sample Output 1:\n#2\n#Explanation:\n\
+    #On removing the elements which are equal to 3, we get 2 2 1 2, so k=2\n\ndef\
+    \ removeElement(nums,val):\n    count=0\n    for i in range (0,len(nums)):\n \
+    \       if nums[i]!=val:\n            count+=1\n    return count"
   error: null
   execution_time: 0
   passed: false
+  readable_completion: 'def removeElement(nums,val):'
   results:
   - actual: 'Error: removeElement() missing 1 required positional argument: ''val'''
     execution_time: 0
@@ -35,58 +43,535 @@
     passed: false
     test_case: 5
   task_id: UserEval/1
-- completion: "#Code:\ndef isPalindrome(s):\n    s=s.lower()\n    s = ''.join(char\
-    \ for char in s if char.isalnum())\n    return s == s[::-1]\n\n#Driver Code:\n\
-    if __name__ == '__main__':\n    s = 'A man, a plan, a canal: Panama'\n    print(isPalindrome(s))"
+- completion: "def isPalindrome(s) :\n    s1=s.lower()\n    s2=s1[::-1]\n    k=s2.replace('\
+    \ ','')\n    a=k.replace('a','')\n    b=a.replace('b','')\n    c=b.replace('c','')\n\
+    \    d=c.replace('d','')\n    e=d.replace('e','')\n    f=e.replace('f','')\n \
+    \   g=f.replace('g','')\n    h=g.replace('h','')\n    i=h.replace('i','')\n  \
+    \  j=i.replace('j','')\n    k=j.replace('k','')\n    l=k.replace('l','')\n   \
+    \ m=l.replace('m','')\n    n=m.replace('n','')\n    o=n.replace('o','')\n    p=o.replace('p','')\n\
+    \    q=p.replace('q','')\n    r=q.replace('r','')\n    s=r.replace('s','')\n \
+    \   t=s.replace('t','')\n    u=t.replace('u','')\n    v=u.replace('v','')\n  \
+    \  w=v.replace('w','')\n    x=w.replace('x','')\n    y=x.replace('y','')\n   \
+    \ z=y.replace('z','')\n    a1=z.replace('a','')\n    b1=a1.replace('b','')\n \
+    \   c1=b1.replace('c','')\n    d1=c1.replace('d','')\n    e1=d1.replace('e','')\n\
+    \    f1=e1.replace('f','')\n    g1=f1.replace('g','')\n    h1=g1.replace('h','')\n\
+    \    i1=h1.replace('i','')\n    j1=i1.replace('j','')\n    k1=j1.replace('k','')\n\
+    \    l1=k1.replace('l','')\n    m1=l1.replace('m','')\n    n1=m1.replace('n','')\n\
+    \    o1=n1.replace('o','')\n    p1=o1.replace('p','')\n    q1=p1.replace('q','')\n\
+    \    r1=q1.replace('r','')\n    s1=r1.replace('s','')\n    t1=s1.replace('t','')\n\
+    \    u1=t1.replace('u','')\n    v1=u1.replace('v','')\n    w1=v1.replace('w','')\n\
+    \    x1=w1.replace('x','')\n    y1=x1.replace('y','')\n    z1=y1.replace('z','')\n\
+    \    a2=z1.replace('a','')\n    b2=a2.replace('b','')\n    c2=b2.replace('c','')\n\
+    \    d2=c2.replace('d','')\n    e2=d2.replace('e','')\n    f2=e2.replace('f','')\n\
+    \    g2=f2.replace('g','')\n    h2=g2.replace('h','')\n    i2=h2.replace('i','')\n\
+    \    j2=i2.replace('j','')\n    k2=j2.replace('k','')\n    l2=k2.replace('l','')\n\
+    \    m2=l2.replace('m','')\n    n2=m2.replace('n','')\n    o2=n2.replace('o','')\n\
+    \    p2=o2.replace('p','')\n    q2=p2.replace('q','')\n    r2=q2.replace('r','')\n\
+    \    s2=r2.replace('s','')\n    t2=s2.replace('t','')\n    u2=t2.replace('u','')\n\
+    \    v2=u2.replace('v','')\n    w2=v2.replace('w','')\n    x2=w2.replace('x','')\n\
+    \    y2=x2.replace('y','')\n    z2=y2.replace('z','')\n    k3=z2.replace('a','')\n\
+    \    l3=k3.replace('b','')\n    m3=l3.replace('c','')\n    n3=m3.replace('d','')\n\
+    \    o3=n3.replace('e','')\n    p3=o3.replace('f','')\n    q3=p3.replace('g','')\n\
+    \    r3=q3.replace('h','')\n    s3=r3.replace('i','')\n    t3=s3.replace('j','')\n\
+    \    u3=t3.replace('k','')\n    v3=u3.replace('l','')\n    w3=v3.replace('m','')\n\
+    \    x3=w3.replace('n','')\n    y3=x3.replace('o','')\n    z3=y3.replace('p','')\n\
+    \    a3=z3.replace('q','')\n    b3=a3.replace('r','')\n    c3=b3.replace('s','')\n\
+    \    d3=c3.replace('t','')\n    e3=d3.replace('u','')\n    f3=e3.replace('v','')\n\
+    \    g3=f3.replace('w','')\n    h3=g3.replace('x','')\n    i3=h3.replace('y','')\n\
+    \    j3=i3.replace('z','')\n    k4=j3.replace('a','')\n    l4=k4.replace('b','')\n\
+    \    m4=l4.replace('c','')\n    n4=m4.replace('d','')\n    o4=n4.replace('e','')\n\
+    \    p4=o4.replace('f','')\n    q4=p4.replace('g','')\n    r4=q4.replace('h','')\n\
+    \    s4=r4.replace('i','')\n    t4=s4.replace('j','')\n    u4=t4.replace('k','')\n\
+    \    v4=u4.replace('l','')\n    w4=v4.replace('m','')\n    x4=w4.replace('n','')\n\
+    \    y4=x4.replace('o','')\n    z4=y4.replace('p','')\n    a4=z4.replace('q','')\n\
+    \    b4=a4.replace('r','')\n    c4=b4.replace('s','')\n    d4=c4.replace('t','')\n\
+    \    e4=d4.replace('u','')\n    f4=e4.replace('v','')\n    g4=f4.replace('w','')\n\
+    \    h4=g4.replace('x','')\n    i4=h4.replace('y','')\n    j4=i4.replace('z','')\n\
+    \    k5=j4.replace('a','')\n    l5=k5.replace('b','')\n    m5=l5.replace('c','')\n\
+    \    n5=m5.replace('d','')\n    o5=n5.replace('e','')\n    p5=o5.replace('f','')\n\
+    \    q5=p5.replace('g','')\n    r5=q5.replace('h','')\n    s5=r5.replace('i','')\n\
+    \    t5=s5.replace('j','')\n    u5=t5.replace('k','')\n    v5=u5.replace('l','')\n\
+    \    w5=v5.replace('m','')\n    x5=w5.replace('n','')\n    y5=x5.replace('o','')\n\
+    \    z5=y5.replace('p','')\n    a5=z5.replace('q','')\n    b5=a5.replace('r','')\n\
+    \    c5=b5.replace('s','')\n    d5=c5.replace('t','')\n    e5=d5.replace('u','')\n\
+    \    f5=e5.replace('v','')\n    g5=f5.replace('w','')\n    h5=g5.replace('x','')\n\
+    \    i5=h5.replace('y','')\n    j5=i5.replace('z','')\n    k6=j5.replace('a','')\n\
+    \    l6=k6.replace('b','')\n    m6=l6.replace('c','')\n    n6=m6.replace('d','')\n\
+    \    o6=n6.replace('e','')\n    p6=o6.replace('f','')\n    q6=p6.replace('g','')\n\
+    \    r6=q6.replace('h','')\n    s6=r6.replace('i','')\n    t6=s6.replace('j','')\n\
+    \    u6=t6.replace('k','')\n    v6=u6.replace('l','')\n    w6=v6.replace('m','')\n\
+    \    x6=w6.replace('n','')\n    y6=x6.replace('o','')\n    z6=y6.replace('p','')\n\
+    \    a6=z6.replace('q','')\n    b6=a6.replace('r','')\n    c6=b6.replace('s','')\n\
+    \    d6=c6.replace('t','')\n    e6=d6.replace('u','')\n    f6=e6.replace('v','')\n\
+    \    g6=f6.replace('w','')\n    h6=g6.replace('x','')\n    i6=h6.replace('y','')\n\
+    \    j6=i6.replace('z','')\n    k7=j6.replace('a','')\n    l7=k7.replace('b','')\n\
+    \    m7=l7.replace('c','')\n    n7=m7.replace('d','')\n    o7=n7.replace('e','')\n\
+    \    p7=o7.replace('f','')\n    q7=p7.replace('g','')\n    r7=q7.replace('h','')\n\
+    \    s7=r7.replace('i','')\n    t7=s7.replace('j','')\n    u7=t7.replace('k','')\n\
+    \    v7=u7.replace('l','')\n    w7=v7.replace('m','')\n    x7=w7.replace('n','')\n\
+    \    y7=x7.replace('o','')\n    z7=y7.replace('p','')\n    a7=z7.replace('q','')\n\
+    \    b7=a7.replace('r','')\n    c7=b7.replace('s','')\n    d7=c7.replace('t','')\n\
+    \    e7=d7.replace('u','')\n    f7=e7.replace('v','')\n    g7=f7.replace('w','')\n\
+    \    h7=g7.replace('x','')\n    i7=h7.replace('y','')\n    j7"
   error: null
-  execution_time: 9.298324584960938e-06
-  passed: true
+  execution_time: 0
+  passed: false
+  readable_completion: 'def isPalindrome(s) :
+
+    s1=s.lower()
+
+    s2=s1[::-1]
+
+    k=s2.replace('' '','''')
+
+    a=k.replace(''a'','''')
+
+    b=a.replace(''b'','''')
+
+    c=b.replace(''c'','''')
+
+    d=c.replace(''d'','''')
+
+    e=d.replace(''e'','''')
+
+    f=e.replace(''f'','''')
+
+    g=f.replace(''g'','''')
+
+    h=g.replace(''h'','''')
+
+    i=h.replace(''i'','''')
+
+    j=i.replace(''j'','''')
+
+    k=j.replace(''k'','''')
+
+    l=k.replace(''l'','''')
+
+    m=l.replace(''m'','''')
+
+    n=m.replace(''n'','''')
+
+    o=n.replace(''o'','''')
+
+    p=o.replace(''p'','''')
+
+    q=p.replace(''q'','''')
+
+    r=q.replace(''r'','''')
+
+    s=r.replace(''s'','''')
+
+    t=s.replace(''t'','''')
+
+    u=t.replace(''u'','''')
+
+    v=u.replace(''v'','''')
+
+    w=v.replace(''w'','''')
+
+    x=w.replace(''x'','''')
+
+    y=x.replace(''y'','''')
+
+    z=y.replace(''z'','''')
+
+    a1=z.replace(''a'','''')
+
+    b1=a1.replace(''b'','''')
+
+    c1=b1.replace(''c'','''')
+
+    d1=c1.replace(''d'','''')
+
+    e1=d1.replace(''e'','''')
+
+    f1=e1.replace(''f'','''')
+
+    g1=f1.replace(''g'','''')
+
+    h1=g1.replace(''h'','''')
+
+    i1=h1.replace(''i'','''')
+
+    j1=i1.replace(''j'','''')
+
+    k1=j1.replace(''k'','''')
+
+    l1=k1.replace(''l'','''')
+
+    m1=l1.replace(''m'','''')
+
+    n1=m1.replace(''n'','''')
+
+    o1=n1.replace(''o'','''')
+
+    p1=o1.replace(''p'','''')
+
+    q1=p1.replace(''q'','''')
+
+    r1=q1.replace(''r'','''')
+
+    s1=r1.replace(''s'','''')
+
+    t1=s1.replace(''t'','''')
+
+    u1=t1.replace(''u'','''')
+
+    v1=u1.replace(''v'','''')
+
+    w1=v1.replace(''w'','''')
+
+    x1=w1.replace(''x'','''')
+
+    y1=x1.replace(''y'','''')
+
+    z1=y1.replace(''z'','''')
+
+    a2=z1.replace(''a'','''')
+
+    b2=a2.replace(''b'','''')
+
+    c2=b2.replace(''c'','''')
+
+    d2=c2.replace(''d'','''')
+
+    e2=d2.replace(''e'','''')
+
+    f2=e2.replace(''f'','''')
+
+    g2=f2.replace(''g'','''')
+
+    h2=g2.replace(''h'','''')
+
+    i2=h2.replace(''i'','''')
+
+    j2=i2.replace(''j'','''')
+
+    k2=j2.replace(''k'','''')
+
+    l2=k2.replace(''l'','''')
+
+    m2=l2.replace(''m'','''')
+
+    n2=m2.replace(''n'','''')
+
+    o2=n2.replace(''o'','''')
+
+    p2=o2.replace(''p'','''')
+
+    q2=p2.replace(''q'','''')
+
+    r2=q2.replace(''r'','''')
+
+    s2=r2.replace(''s'','''')
+
+    t2=s2.replace(''t'','''')
+
+    u2=t2.replace(''u'','''')
+
+    v2=u2.replace(''v'','''')
+
+    w2=v2.replace(''w'','''')
+
+    x2=w2.replace(''x'','''')
+
+    y2=x2.replace(''y'','''')
+
+    z2=y2.replace(''z'','''')
+
+    k3=z2.replace(''a'','''')
+
+    l3=k3.replace(''b'','''')
+
+    m3=l3.replace(''c'','''')
+
+    n3=m3.replace(''d'','''')
+
+    o3=n3.replace(''e'','''')
+
+    p3=o3.replace(''f'','''')
+
+    q3=p3.replace(''g'','''')
+
+    r3=q3.replace(''h'','''')
+
+    s3=r3.replace(''i'','''')
+
+    t3=s3.replace(''j'','''')
+
+    u3=t3.replace(''k'','''')
+
+    v3=u3.replace(''l'','''')
+
+    w3=v3.replace(''m'','''')
+
+    x3=w3.replace(''n'','''')
+
+    y3=x3.replace(''o'','''')
+
+    z3=y3.replace(''p'','''')
+
+    a3=z3.replace(''q'','''')
+
+    b3=a3.replace(''r'','''')
+
+    c3=b3.replace(''s'','''')
+
+    d3=c3.replace(''t'','''')
+
+    e3=d3.replace(''u'','''')
+
+    f3=e3.replace(''v'','''')
+
+    g3=f3.replace(''w'','''')
+
+    h3=g3.replace(''x'','''')
+
+    i3=h3.replace(''y'','''')
+
+    j3=i3.replace(''z'','''')
+
+    k4=j3.replace(''a'','''')
+
+    l4=k4.replace(''b'','''')
+
+    m4=l4.replace(''c'','''')
+
+    n4=m4.replace(''d'','''')
+
+    o4=n4.replace(''e'','''')
+
+    p4=o4.replace(''f'','''')
+
+    q4=p4.replace(''g'','''')
+
+    r4=q4.replace(''h'','''')
+
+    s4=r4.replace(''i'','''')
+
+    t4=s4.replace(''j'','''')
+
+    u4=t4.replace(''k'','''')
+
+    v4=u4.replace(''l'','''')
+
+    w4=v4.replace(''m'','''')
+
+    x4=w4.replace(''n'','''')
+
+    y4=x4.replace(''o'','''')
+
+    z4=y4.replace(''p'','''')
+
+    a4=z4.replace(''q'','''')
+
+    b4=a4.replace(''r'','''')
+
+    c4=b4.replace(''s'','''')
+
+    d4=c4.replace(''t'','''')
+
+    e4=d4.replace(''u'','''')
+
+    f4=e4.replace(''v'','''')
+
+    g4=f4.replace(''w'','''')
+
+    h4=g4.replace(''x'','''')
+
+    i4=h4.replace(''y'','''')
+
+    j4=i4.replace(''z'','''')
+
+    k5=j4.replace(''a'','''')
+
+    l5=k5.replace(''b'','''')
+
+    m5=l5.replace(''c'','''')
+
+    n5=m5.replace(''d'','''')
+
+    o5=n5.replace(''e'','''')
+
+    p5=o5.replace(''f'','''')
+
+    q5=p5.replace(''g'','''')
+
+    r5=q5.replace(''h'','''')
+
+    s5=r5.replace(''i'','''')
+
+    t5=s5.replace(''j'','''')
+
+    u5=t5.replace(''k'','''')
+
+    v5=u5.replace(''l'','''')
+
+    w5=v5.replace(''m'','''')
+
+    x5=w5.replace(''n'','''')
+
+    y5=x5.replace(''o'','''')
+
+    z5=y5.replace(''p'','''')
+
+    a5=z5.replace(''q'','''')
+
+    b5=a5.replace(''r'','''')
+
+    c5=b5.replace(''s'','''')
+
+    d5=c5.replace(''t'','''')
+
+    e5=d5.replace(''u'','''')
+
+    f5=e5.replace(''v'','''')
+
+    g5=f5.replace(''w'','''')
+
+    h5=g5.replace(''x'','''')
+
+    i5=h5.replace(''y'','''')
+
+    j5=i5.replace(''z'','''')
+
+    k6=j5.replace(''a'','''')
+
+    l6=k6.replace(''b'','''')
+
+    m6=l6.replace(''c'','''')
+
+    n6=m6.replace(''d'','''')
+
+    o6=n6.replace(''e'','''')
+
+    p6=o6.replace(''f'','''')
+
+    q6=p6.replace(''g'','''')
+
+    r6=q6.replace(''h'','''')
+
+    s6=r6.replace(''i'','''')
+
+    t6=s6.replace(''j'','''')
+
+    u6=t6.replace(''k'','''')
+
+    v6=u6.replace(''l'','''')
+
+    w6=v6.replace(''m'','''')
+
+    x6=w6.replace(''n'','''')
+
+    y6=x6.replace(''o'','''')
+
+    z6=y6.replace(''p'','''')
+
+    a6=z6.replace(''q'','''')
+
+    b6=a6.replace(''r'','''')
+
+    c6=b6.replace(''s'','''')
+
+    d6=c6.replace(''t'','''')
+
+    e6=d6.replace(''u'','''')
+
+    f6=e6.replace(''v'','''')
+
+    g6=f6.replace(''w'','''')
+
+    h6=g6.replace(''x'','''')
+
+    i6=h6.replace(''y'','''')
+
+    j6=i6.replace(''z'','''')
+
+    k7=j6.replace(''a'','''')
+
+    l7=k7.replace(''b'','''')
+
+    m7=l7.replace(''c'','''')
+
+    n7=m7.replace(''d'','''')
+
+    o7=n7.replace(''e'','''')
+
+    p7=o7.replace(''f'','''')
+
+    q7=p7.replace(''g'','''')
+
+    r7=q7.replace(''h'','''')
+
+    s7=r7.replace(''i'','''')
+
+    t7=s7.replace(''j'','''')
+
+    u7=t7.replace(''k'','''')
+
+    v7=u7.replace(''l'','''')
+
+    w7=v7.replace(''m'','''')
+
+    x7=w7.replace(''n'','''')
+
+    y7=x7.replace(''o'','''')
+
+    z7=y7.replace(''p'','''')
+
+    a7=z7.replace(''q'','''')
+
+    b7=a7.replace(''r'','''')
+
+    c7=b7.replace(''s'','''')
+
+    d7=c7.replace(''t'','''')
+
+    e7=d7.replace(''u'','''')
+
+    f7=e7.replace(''v'','''')
+
+    g7=f7.replace(''w'','''')
+
+    h7=g7.replace(''x'','''')
+
+    i7=h7.replace(''y'','''')
+
+    j7'
   results:
-  - actual: true
-    execution_time: 6.198883056640625e-06
+  - actual: 'Error: name ''j7'' is not defined'
+    execution_time: 0
     expected: true
     input: 'A man, a plan, a canal: Panama'
-    passed: true
+    passed: false
     test_case: 1
-  - actual: false
-    execution_time: 2.1457672119140625e-06
+  - actual: 'Error: name ''j7'' is not defined'
+    execution_time: 0
     expected: false
     input: race a car
-    passed: true
+    passed: false
     test_case: 2
-  - actual: true
-    execution_time: 9.5367431640625e-07
+  - actual: 'Error: name ''j7'' is not defined'
+    execution_time: 0
     expected: true
     input: ' '
-    passed: true
+    passed: false
     test_case: 3
   task_id: UserEval/2
-- completion: "def setZeroes(matrix):\n  #first pass to find 0s\n  #create set of\
-    \ all row and columns that have 0s\n  row_set = set()\n  col_set = set()\n  for\
-    \ row in range(len(matrix)):\n    for col in range(len(matrix[0])):\n      if\
-    \ matrix[row][col] == 0:\n        row_set.add(row)\n        col_set.add(col)\n\
-    \  #second pass to set the rows and columns that has 0 to 0\n  for row in row_set:\n\
-    \    for col in range(len(matrix[0])):\n      matrix[row][col] = 0\n  for col\
-    \ in col_set:\n    for row in range(len(matrix)):\n      matrix[row][col] = 0\n\
-    \nmatrix = [[1,1,1],[1,0,1],[1,1,1]]\nsetZeroes(matrix)\nprint(matrix)\n\n\n#second\
-    \ solution\ndef setZeroes(matrix):\n  rowZero = False\n  colZero = False\n  #first\
-    \ pass to find 0s\n  #set the row and column to 0 for the row and column which\
-    \ has 0\n  for row in range(len(matrix)):\n    for col in range(len(matrix[0])):\n\
-    \      if matrix[row][col] == 0:\n        if row == 0:\n          rowZero = True\n\
-    \        if col == 0:\n          colZero = True\n        matrix[0][col] = 0\n\
-    \        matrix[row][0] = 0\n  #second pass to set the rows and columns that has\
-    \ 0 to 0\n  for row in range(1,len(matrix)):\n    for col in range(1,len(matrix[0])):\n\
-    \      if matrix[0][col] == 0 or matrix[row][0] == 0:\n        matrix[row][col]\
-    \ = 0\n  #third pass to set the first row and first column to 0\n  if rowZero:\n\
-    \    for col in range(len(matrix[0])):\n      matrix[0][col] = 0\n  if colZero:\n\
-    \    for row in range(len(matrix)):\n      matrix[row][0] = 0\n\nmatrix = [[1,1,1],[1,0,1],[1,1,1]]\n\
-    setZeroes(matrix)\nprint(matrix)"
+- completion: "def setZeroes(matrix):\n    rows = len(matrix)\n    cols = len(matrix[0])\n\
+    \    row = [0 for x in range(rows)]\n    col = [0 for x in range(cols)]\n    for\
+    \ i in range(rows):\n        for j in range(cols):\n            if matrix[i][j]\
+    \ == 0:\n                col[j] = 1\n                row[i] = 1\n    for i in\
+    \ range(rows):\n        for j in range(cols):\n            if col[j] == 1 or row[i]\
+    \ == 1:\n                matrix[i][j] = 0\n    return matrix"
   error: null
-  execution_time: 3.790855407714844e-05
+  execution_time: 4.029273986816406e-05
   passed: false
+  readable_completion: 'def setZeroes(matrix):'
   results:
-  - actual: null
-    execution_time: 8.344650268554688e-06
+  - actual: '[[1,1,1],[1,0,1],[1,1,1]]'
+    execution_time: 1.1205673217773438e-05
     expected:
     - - 1
       - 0
@@ -100,8 +585,8 @@
     input: '[[1,1,1],[1,0,1],[1,1,1]]'
     passed: false
     test_case: 1
-  - actual: null
-    execution_time: 8.821487426757812e-06
+  - actual: '[[0,1,2,0],[3,4,5,2],[1,3,1,5]]'
+    execution_time: 9.298324584960938e-06
     expected:
     - - 0
       - 0
@@ -118,8 +603,8 @@
     input: '[[0,1,2,0],[3,4,5,2],[1,3,1,5]]'
     passed: false
     test_case: 2
-  - actual: null
-    execution_time: 6.9141387939453125e-06
+  - actual: '[[1,2,3],[4,5,6],[7,8,9]]'
+    execution_time: 7.152557373046875e-06
     expected:
     - - 1
       - 2
@@ -133,8 +618,8 @@
     input: '[[1,2,3],[4,5,6],[7,8,9]]'
     passed: false
     test_case: 3
-  - actual: null
-    execution_time: 6.9141387939453125e-06
+  - actual: '[[1,2,3],[4,0,6],[7,8,9]]'
+    execution_time: 5.7220458984375e-06
     expected:
     - - 1
       - 0
@@ -148,7 +633,7 @@
     input: '[[1,2,3],[4,0,6],[7,8,9]]'
     passed: false
     test_case: 4
-  - actual: null
+  - actual: '[[1,2,3],[4,5,6],[7,0,9]]'
     execution_time: 6.9141387939453125e-06
     expected:
     - - 1
@@ -164,158 +649,273 @@
     passed: false
     test_case: 5
   task_id: UserEval/3
-- completion: "#Function: mergeLists\n#Arguments:\n#lists: list of lists of integers\n\
-    #returns: merged linked list\ndef mergeLists(lists):\n    mergedlist = []\n  \
-    \  for list in lists:\n        for num in list:\n            mergedlist.append(num)\n\
-    \    mergedlist.sort()\n    return mergedlist\n\n\nif __name__ == \"__main__\"\
-    :\n    lists1 = [[1, 4, 5], [1, 3, 4], [2, 6]]\n    lists2 = []\n    lists3 =\
-    \ [[]]\n    mergedlist1 = mergeLists(lists1)\n    mergedlist2 = mergeLists(lists2)\n\
-    \    mergedlist3 = mergeLists(lists3)\n    print(mergedlist1)  # [1,1,2,3,4,4,5,6]\n\
-    \    print(mergedlist2)  # []\n    print(mergedlist3)  # []"
+- completion: "def merge_k_lists(lists):\n    return head\n\n\n#Implement solution\
+    \ using this approach:\ndef merge_k_lists(lists):\n\n    if not lists:\n     \
+    \   return None\n    if len(lists) == 1:\n        return lists[0]\n\n    mid =\
+    \ len(lists)//2\n    left = merge_k_lists(lists[:mid])\n    right = merge_k_lists(lists[mid:])\n\
+    \n    return merge_lists(left, right)\n\ndef merge_lists(l, r):\n\n    if not\
+    \ l:\n        return r\n    if not r:\n        return l\n\n    if l.val < r.val:\n\
+    \        l.next = merge_lists(l.next, r)\n        return l\n\n    else:\n    \
+    \    r.next = merge_lists(l, r.next)\n        return r"
   error: '''mergeKLists'''
   execution_time: null
   passed: false
+  readable_completion: 'def merge_k_lists(lists):
+
+
+    def merge_k_lists(lists):
+
+
+    def merge_lists(l, r):'
   results: []
   task_id: UserEval/4
-- completion: "def letterCompositions(digits):\n    #Complete the function\n    if\
-    \ not digits:\n        return []\n    result = []\n    mapping = {\n        \"\
-    2\": \"abc\",\n        \"3\": \"def\",\n        \"4\": \"ghi\",\n        \"5\"\
-    : \"jkl\",\n        \"6\": \"mno\",\n        \"7\": \"pqrs\",\n        \"8\":\
-    \ \"tuv\",\n        \"9\": \"wxyz\"\n    }\n\n    def _combination(remain, current):\n\
-    \        if len(current) == len(digits):\n            result.append(current)\n\
-    \        else:\n            for letter in mapping[remain]:\n                _combination(remain[1:],\
-    \ current + letter)\n    _combination(digits, \"\")\n    return result"
-  error: '''letterCombinations'''
-  execution_time: null
-  passed: false
-  results: []
-  task_id: UserEval/5
-- completion: ''
-  error: '''int_to_mini_roman'''
-  execution_time: null
-  passed: false
-  results: []
-  task_id: UserEval/6
-- completion: "# Author: Ruchitha\n# Date: 10-17-2018\n# Feedback: No\n# Time taken:\
-    \ 30 mins\ndef parse_nested_parens(s):\n    return"
+- completion: "def letterCombinations(digits):\n    \"\"\"\n    :type digits: str\n\
+    \    :rtype: List[str]\n    \"\"\"\n    #code here\n    return"
   error: null
-  execution_time: 7.152557373046875e-07
+  execution_time: 0.0
   passed: false
+  readable_completion: 'def letterCombinations(digits):'
   results:
   - actual: null
     execution_time: 0.0
+    expected:
+    - ad
+    - ae
+    - af
+    - bd
+    - be
+    - bf
+    - cd
+    - ce
+    - cf
+    input: '23'
+    passed: false
+    test_case: 1
+  - actual: null
+    execution_time: 0.0
+    expected: []
+    input: ''
+    passed: false
+    test_case: 2
+  - actual: null
+    execution_time: 0.0
+    expected:
+    - a
+    - b
+    - c
+    input: '2'
+    passed: false
+    test_case: 3
+  - actual: null
+    execution_time: 0.0
+    expected:
+    - adg
+    - adh
+    - adi
+    - aeg
+    - aeh
+    - aei
+    - afg
+    - afh
+    - afi
+    - bdg
+    - bdh
+    - bdi
+    - beg
+    - beh
+    - bei
+    - bfg
+    - bfh
+    - bfi
+    - cdg
+    - cdh
+    - cdi
+    - ceg
+    - ceh
+    - cei
+    - cfg
+    - cfh
+    - cfi
+    input: '234'
+    passed: false
+    test_case: 4
+  task_id: UserEval/5
+- completion: "def int_to_mini_roman(num):\n    pass\n\n# To test your function, uncomment\
+    \ the following lines.\n# You can adjust the values of the variables, if you want.\n\
+    # You can also run your code in the Python shell to test it.\n# You can use the\
+    \ Python shell to check if your outputs are correct.\n# However, you will not\
+    \ be able to test your code on the Webjudge.\n# You can also check if your code\
+    \ is correct using the Webjudge.\n\n# # Test function\n# print(int_to_mini_roman(19))\n\
+    \n# # Test function\n# print(int_to_mini_roman(152))\n\n# # Test function\n# print(int_to_mini_roman(426))"
+  error: null
+  execution_time: 2.86102294921875e-06
+  passed: false
+  readable_completion: 'def int_to_mini_roman(num):'
+  results:
+  - actual: null
+    execution_time: 9.5367431640625e-07
+    expected: xix
+    input: 19
+    passed: false
+    test_case: 1
+  - actual: null
+    execution_time: 1.1920928955078125e-06
+    expected: clii
+    input: 152
+    passed: false
+    test_case: 2
+  - actual: null
+    execution_time: 0.0
+    expected: cdxxvi
+    input: 426
+    passed: false
+    test_case: 3
+  - actual: null
+    execution_time: 7.152557373046875e-07
+    expected: m
+    input: 1000
+    passed: false
+    test_case: 4
+  - actual: null
+    execution_time: 0.0
+    expected: i
+    input: 1
+    passed: false
+    test_case: 5
+  task_id: UserEval/6
+- completion: "def parse_nested_parens(groups):\n    \"\"\"input is a string represented\
+    \ multiple groups for nested  parentheses separated by spaces.  For each of the\
+    \ group, output the deepest level of nesting of parentheses.  E.g.  (()()) has\
+    \ maximum two levels of nesting  ((())) has three.  \n    >>> parse_nested_parens('(()())\
+    \ ((())) () ((())()())') [2, 3, 1, 3] \n    \"\"\"\n    res = []\n    for group\
+    \ in groups.split():\n        counter = 0\n        max_nest = 0\n        for i\
+    \ in range(len(group)):\n            if group[i] == \"(\":\n                counter\
+    \ += 1\n                if counter > max_nest:\n                    max_nest =\
+    \ counter\n            elif group[i] == \")\":\n                counter -= 1\n\
+    \        res.append(max_nest)\n    return res"
+  error: null
+  execution_time: 1.0728836059570312e-05
+  passed: true
+  readable_completion: 'def parse_nested_parens(groups):'
+  results:
+  - actual:
+    - 2
+    - 3
+    - 1
+    - 3
+    execution_time: 5.0067901611328125e-06
     expected:
     - 2
     - 3
     - 1
     - 3
     input: (()()) ((())) () ((())()())
-    passed: false
+    passed: true
     test_case: 1
-  - actual: null
-    execution_time: 0.0
+  - actual:
+    - 3
+    execution_time: 9.5367431640625e-07
     expected:
     - 3
     input: ((()))
-    passed: false
+    passed: true
     test_case: 2
-  - actual: null
-    execution_time: 0.0
+  - actual:
+    - 3
+    - 1
+    execution_time: 9.5367431640625e-07
     expected:
     - 3
     - 1
     input: ((())) ()
-    passed: false
+    passed: true
     test_case: 3
-  - actual: null
-    execution_time: 0.0
+  - actual:
+    - 3
+    - 1
+    - 3
+    execution_time: 1.6689300537109375e-06
     expected:
     - 3
     - 1
     - 3
     input: ((())) () ((()))
-    passed: false
+    passed: true
     test_case: 4
-  - actual: null
-    execution_time: 7.152557373046875e-07
+  - actual:
+    - 3
+    - 1
+    - 3
+    - 1
+    execution_time: 2.1457672119140625e-06
     expected:
     - 3
     - 1
     - 3
     - 1
     input: ((())) () ((())) ()
-    passed: false
+    passed: true
     test_case: 5
   task_id: UserEval/7
-- completion: "def encode(message):\n    #check if the input message is empty or not\n\
-    \    if not message:\n        return ''\n    #create the new_string to store the\
-    \ encoded message\n    new_string = ''\n    #check for each character in the message\n\
-    \    for i in message:\n        #if the character is a letter\n        if i.isalpha():\n\
-    \            #if the character is upper case\n            if i.isupper():\n  \
-    \              #convert the character to lower case\n                new_string\
-    \ += chr(ord(i) + 32)\n            #if the character is lower case\n         \
-    \   else:\n                #convert the character to upper case\n            \
-    \    new_string += chr(ord(i) - 32)\n        else:\n            #if the character\
-    \ is a vowel\n            if i.lower() in 'aeiou':\n                #move the\
-    \ character to the next position in the alphabet\n                new_string +=\
-    \ chr(ord(i) + 2)\n            else:\n                #add the character to the\
-    \ new string as it is\n                new_string += i\n\n    #return the encoded\
-    \ message\n    return new_string"
+- completion: "def encode(message):\n    result = \"\"\n    for letter in message:\n\
+    \        if letter.lower() not in 'aeiou':\n            result += letter\n   \
+    \     else:\n            result += chr(ord(letter) + 2)\n    return result"
   error: null
-  execution_time: 1.1444091796875e-05
+  execution_time: 9.298324584960938e-06
   passed: false
+  readable_completion: 'def encode(message):'
   results:
-  - actual: TEST
+  - actual: tgst
     execution_time: 3.0994415283203125e-06
     expected: TGST
     input: test
     passed: false
     test_case: 1
-  - actual: mUDASIR
-    execution_time: 3.0994415283203125e-06
+  - actual: Mwdcskr
+    execution_time: 1.9073486328125e-06
     expected: mWDCSKR
     input: Mudasir
     passed: false
     test_case: 2
-  - actual: 'yes'
-    execution_time: 9.5367431640625e-07
+  - actual: YGS
+    execution_time: 1.1920928955078125e-06
     expected: ygs
     input: 'YES'
     passed: false
     test_case: 3
-  - actual: tHIS IS A MESSAGE
+  - actual: Thks ks c mgsscgg
     execution_time: 2.1457672119140625e-06
     expected: tHKS KS C MGSSCGG
     input: This is a message
     passed: false
     test_case: 4
-  - actual: i dOnT kNoW wHaT To wRiTe
-    execution_time: 2.1457672119140625e-06
+  - actual: K DqNt KnQw WhCt tQ WrKtG
+    execution_time: 9.5367431640625e-07
     expected: k dQnT kNqW wHcT Tq wRkTg
     input: I DoNt KnOw WhAt tO WrItE
     passed: false
     test_case: 5
   task_id: UserEval/8
-- completion: "def tri(n):\n    return list(range(n+1))"
+- completion: "def tri(n):\n    if n == 0:\n        return [1]\n    elif n == 1:\n\
+    \        return [1, 3]\n    elif n == 2:\n        return [1, 3, 2]\n    else:\n\
+    \        return [1, 3, 2, tri(n-1)[0] + tri(n-1)[1] + tri(n-1)[2]]"
   error: '''tribonacci'''
   execution_time: null
   passed: false
+  readable_completion: 'def tri(n):'
   results: []
   task_id: UserEval/9
-- completion: "def words_string(words):\n  items = words.split(\",\")\n  for i in\
-    \ range(len(items)):\n    items[i] = items[i].strip()\n    words = items[i].split()\n\
-    \    for i in range(len(words)):\n      words[i] = words[i].strip()\n  return\
-    \ words"
+- completion: "def words_string(string):\n    string = string.split(',')\n    for\
+    \ word in string:\n        word = word.strip()\n    return string"
   error: null
-  execution_time: 8.106231689453125e-06
+  execution_time: 3.0994415283203125e-06
   passed: false
+  readable_completion: 'def words_string(string):'
   results:
   - actual:
-    - my
-    - name
-    - is
-    - John
-    execution_time: 5.0067901611328125e-06
+    - Hi
+    - ' my name is John'
+    execution_time: 9.5367431640625e-07
     expected:
     - Hi
     - my
@@ -326,8 +926,13 @@
     passed: false
     test_case: 1
   - actual:
-    - six
-    execution_time: 3.0994415283203125e-06
+    - One
+    - ' two'
+    - ' three'
+    - ' four'
+    - ' five'
+    - ' six'
+    execution_time: 2.1457672119140625e-06
     expected:
     - One
     - two
